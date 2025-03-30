@@ -1,0 +1,99 @@
+
+.workspace-list-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 50px ;
+}
+
+.workspace-list-container-title{
+    text-align: start;
+    align-self: center;
+    margin-bottom: 20px;
+}
+
+
+/* LISTA DE WORKSPACES DEL USUARIO */
+
+.workspace-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1px;
+    width: 50%;
+    border: 5px solid #6D4876 ;
+    border-radius: 5px;
+}
+
+.workspace-list-card-title{
+    background-color: #ECDEEC;
+    height: 60px;
+    width: 100%;
+    border-radius: 5px 5px 0 0;
+}
+
+.workspace-list-card-title span{
+    display: flex;
+    color: #000;
+    margin: 20px 0px 20px 20px;
+    font-size: 16px;
+}
+
+.workspace-card {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #fff;
+    border-bottom: 2px solid #FAFAFA;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.workspace-info {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+.workspace-logo {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+.workspace-info h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin: 0;
+}
+
+.workspace-info p {
+    font-size: 1rem;
+    color: #888;
+}
+
+/* BUTTON INICAR SLACK */
+
+.btn-start {
+    background-color: #611F69;
+    color: white;
+    text-align: center;
+    padding: 20px 10px;
+    margin: 10px 20px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.workspace-card-item{
+    display: flex;
+    flex-direction: row;
+}
+
+.btn-start:hover {
+    background-color: #481A54;
+}
+
+

@@ -1,0 +1,42 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+:root{
+    --board-slack: #481A54;
+    --blue-edit: #3FAEDE;
+}
+
+ul{
+    list-style: none;
+}
+
+
+.btn-config{
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+}
+
+.btn-close-config{
+    width: 40px;
+    margin: 2px;
+    border-radius: 20px;
+    height: 40px;
+    color: #000000;
+    background-color: transparent ;
+    font-size: 20px;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.text{
+    color: #D1D2D3;
+}
+

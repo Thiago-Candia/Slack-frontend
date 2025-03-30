@@ -1,0 +1,141 @@
+
+
+/* MODAL PROFILE */
+
+.modal-profile-overlay{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-profile{
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    background-color: var(--board-slack);
+    padding: 30px;
+    border-radius: 8px ;
+}
+
+/* HEADER. TITULO Y BOTON CERRAR */
+
+.modal-profile-header{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.btn-close-modal-profile{
+    background-color: transparent;
+    color: #D1D2D3 ;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+}
+
+.btn-close-modal-profile:hover{
+    background-color: #26292C ;
+    border-radius: 8px;
+}
+
+.avatar-user{
+    margin: auto;
+    margin-top: 10px;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.avatar-user img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover ;
+}
+
+.modal-profile-info{
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-profile-info-item{
+    display: flex;
+    align-items: center;
+    margin-top: 10px ;
+}
+
+.modal-profile-info-item:first-child {
+    justify-content: space-between;
+}
+
+.text-edit{
+    color: var(--blue-edit);
+}
+
+.modal-profile-info-item:nth-child(2){
+    color: var(--blue-edit);
+}
+
+.modal-profile-info-item:nth-child(5){
+    justify-content: space-around;
+    gap: 10px;
+}
+
+.btn-edit-status{
+    border: 1px solid #fff;
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.modal-profile-info-item:nth-child(6){
+    margin-top: 15px;
+    gap: 15px;
+    flex-direction: column;
+}
+
+.modal-profile-info-item-contact{
+    display: flex;
+    width: 100%;
+}
+
+.modal-profile-info-item-contact:first-child{
+    justify-content: space-between;
+}
+
+.modal-profile-info-item-contact:last-child{
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.modal-profile-email{
+    display: flex;
+}
+
+.modal-profile-email i{
+    padding: 8px;
+    border-radius: 5px;
+    background-color: #222529 ;
+}
+
+.modal-profile-email:last-child{
+    flex-direction: column;
+}
+
+.modal-profile-email span:last-child{
+    color: var(--blue-edit);
+}
+
+
+
+
+

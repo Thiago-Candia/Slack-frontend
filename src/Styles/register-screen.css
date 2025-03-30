@@ -1,0 +1,106 @@
+
+.register-screen{
+    display: flex;
+    height: 100vh;
+    background-color: var(--board-slack);
+}
+
+.register-container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 500px;
+    background-color: #fff;
+    text-align: center;
+    border-radius: 12px;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.register-container h1 {
+    font-size: 24px;
+    margin-top: 19px;
+    color: #1f2937;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+/* Formulario */
+.form-register {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-register label {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3px;
+    font-size: 14px;
+    color: #4b5563;
+    text-align: left;
+    font-weight: 500;
+}
+
+.form-register input {
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+}
+
+.form-register input:focus {
+    border-color: #3b82f6;
+    outline: none;
+    box-shadow: 0px 0px 5px rgba(59, 130, 246, 0.5);
+}
+
+
+.register-btn-container{
+    display: flex;
+    justify-content: center;
+}
+
+.register-btn {
+    display: flex;
+    justify-content: center;
+    background-color: #3b82f6;
+    color: white;
+    padding: 12px;
+    width: 80%;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background 0.3s ease-in-out;
+}
+
+.register-button:hover {
+    background: #2563eb;
+}
+
+/* Links */
+.register-links {
+    margin-top: 1rem;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.register-links a {
+    color: #3b82f6;
+
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.register-links a:hover {
+    color: #1e40af;
+}
+
+/* Mensaje de error */
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: -5px;
+}

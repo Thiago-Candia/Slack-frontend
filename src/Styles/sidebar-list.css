@@ -1,0 +1,114 @@
+/* ------------------ SIDEBAR HEADER ------------------ */
+
+.sidebar-item-header{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.sidebar-item-header:nth-child(1) .btn-sidebar-header{
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.btn-sidebar-header:nth-child(2){
+    padding: 6px;
+    border-radius: 5px;
+}
+
+.btn-sidebar-header:nth-child(2):hover{
+    background-color: #312235 ;
+}
+
+.sidebar-item-header:nth-child(2) .btn-sidebar-header{
+    margin-top: 6px;
+    padding: 8px 8px;
+    border-radius: 6px;
+    width: 100%;
+    background-color: #7D3986;
+}
+
+/* ------------------ SIDEBAR LIST ------------------ */
+
+.sidebar-list-title button:hover,
+.container-btn-list button:hover{
+    background-color: #302132;
+    border-radius: 6px;
+}
+
+.channel-list a:hover,
+.user-list a:hover,
+.btn-list-sidebar:hover {
+    background-color: #2D1F30;
+}
+
+.channel-list a:focus,
+.user-list a:focus {
+    background-color: #7D3986;
+}
+
+.channel-item,
+.user-item{
+    display: flex;
+    align-items: center;
+    margin-bottom: 2px;
+}
+
+.channel-list a,
+.user-list a{
+    color: #bbb;
+    text-decoration: none;
+    width: 100%;
+    padding: 3px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.channel-item-name{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* BUTTON ADD CHANNELS AND USERS */
+
+.btn-list-sidebar{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.container-btn-list button{
+    padding: 2px;
+}
+
+.btn-list-sidebar i{
+    background-color: #151118;
+    padding: 2px;
+    border-radius: 4px;
+}
+
+.sidebar-list-title{
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.sidebar-list-title i{
+    font-size: 20px;
+    color: #BFACC6;
+}
+
+.btn-list-sidebar {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+
+
+
+
+
+

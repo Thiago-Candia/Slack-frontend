@@ -1,0 +1,94 @@
+
+.home-container {
+    background-color: var(--board-slack);
+    height: 100vh;
+}
+
+/* SECTION NUEVO WORKSPACE */
+
+
+.new-workspace-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    margin: auto;
+    margin-top: 50px;
+    background-color: #fff;
+    border: 5px solid #6D4876;
+    border-radius: 10px;
+}
+
+.new-workspace {
+    display: flex;
+    height: 90px;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.new-workspace-item:nth-child(2),
+.new-workspace-item:nth-child(3) {
+    display: flex;
+    align-items: center;
+}
+
+.new-workspace p {
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+} 
+
+.btn-new {
+    color: var(--board-slack);
+    border: 1px solid var(--board-slack);
+    padding: 14px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-new:hover {
+    border: 3px solid var(--board-slack);
+}
+
+
+/* NO WORKSPACE - OTRO CORREO ELECTRONICO */
+
+
+.no-workspace{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    font-size: 18px;
+}
+
+.no-workspace .other-email{
+    color: #36C5F0;
+}
+
+
+
+/* Estilos generales de HomeScreen */
+.home-container {
+    height: 120vh;
+    background-color: var(--board-slack);
+    font-size: 2rem;
+    color: #fff;
+}
+
+.no-workspace {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    font-size: 18px;
+}
+
+.no-workspace .other-email {
+    color: #36C5F0;
+}

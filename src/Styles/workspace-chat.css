@@ -1,0 +1,73 @@
+
+.sidbar-desktop{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background: #360D3A;
+    height: 100%;
+    padding: 12px 4px;
+}
+
+.sidbar-desktop-item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.button-sidebar-desktop{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    transition: background 0.2s ease-in-out;
+    border-radius: 8px;
+}
+
+.button-sidebar-desktop:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.button-sidebar-desktop i{
+    font-size: 24px;
+    color: #B4A7B6;
+    margin-bottom: 4px;
+}
+
+.button-sidebar-desktop span{
+    color: #B4A7B6;
+    font-size: 12px;
+}
+
+/* BOTON DE MAS OPCIONES */
+
+.button-plus-sidebar-desktop{
+    margin: auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    background-color: #462949;
+}
+
+.button-plus-sidebar-desktop i{
+    margin: auto;
+}
+
+.button-plus-sidebar-desktop:hover{
+    width: 45px;
+    height: 45px;
+}
+
+
+/* IMAGEN USUARIO Y PERFIL */
+
+.sidbar-desktop img{
+    width: 50px;
+    height: 50px;
+    border-radius: 8px ;
+    object-fit: cover;
+}

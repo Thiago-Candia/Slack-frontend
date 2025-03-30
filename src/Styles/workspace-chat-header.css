@@ -1,0 +1,88 @@
+.workspace-header-chat-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background: #360D3A;
+    padding: 6px 12px;
+}
+
+.workspace-header-chat-space {
+    width: 70px;
+}
+
+.workspace-header-chat-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+    /* Botones de navegación */
+.nav-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.nav-button {
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 4px;
+    transition: 0.3s;
+}
+
+.nav-button:hover {
+    opacity: 0.8;
+}
+
+    /* Barra de búsqueda */
+.search-bar {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 6px 12px;
+    border-radius: 6px;
+    flex: 1;
+    max-width: 400px;
+}
+
+.search-bar input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: white;
+    outline: none;
+    font-size: 14px;
+}
+
+.search-icon {
+    color: white;
+    margin-left: 6px;
+}
+
+    /* Botón de versión de prueba */
+.pro-version {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pro-button {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.help-button {
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+}

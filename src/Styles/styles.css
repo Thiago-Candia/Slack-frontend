@@ -1,0 +1,50 @@
+
+/* SCREENS */
+
+@import url('normalize.css');
+
+@import url('home-screen.css');
+
+@import url('login-screen.css');
+
+@import url('register-screen.css');
+
+@import url('workspace-screen.css');
+
+@import url('new.message.css');
+
+@import url('message-list.css'); 
+
+@import url('modal-create-channel.css');
+
+@import url('sidebar-list.css');
+
+@import url('modal-inivte-user.css');
+
+@import url('nav-home.css');
+
+@import url('workspace-list.css');
+
+@import url('workspace-chat-header.css');
+
+@import url('workspace-chat.css');
+
+@import url('modal-profile-user.css');
+
+@import url('modal-edit-profile.css');
+
+@import url('rewrite-password.css');
+
+@import url('create-workspace.css');
+
+
+
+/* RESPONSIVE */
+
+@import url('responsive.css');
+
+
+
+/* FONTS */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');

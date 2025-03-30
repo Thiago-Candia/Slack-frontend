@@ -1,0 +1,123 @@
+
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes slideInFromLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Modal */
+
+.modal-container__create-channel{
+    display: flex;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    background-color: #0000005d;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-container__create-channel:target{
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Modal container */
+
+.modal__create-channel{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    position: relative;
+    width: 30%;
+    height: 40%;
+    background-color: #cfcdcdc7;
+    flex-direction: column;
+    animation: slideDown 0.3s ease;
+    border-radius: 10px;
+}
+
+.modal-title__create-channel{
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 1rem;
+    animation: slideInFromLeft 0.7s ease-out forwards;
+}
+
+/* Modal close */
+
+.btn-modal-close{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    margin: 2px;
+    border-radius: 20px;
+    height: 40px;
+    color: #000000;
+    background-color: transparent ;
+    font-size: 20px;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    font-weight: bold;
+    animation: slideInFromLeft 0.7s ease-out forwards;
+}
+
+.btn-modal-close:hover{
+    background-color: #ffffff5e;
+}
+
+.modal-form__create-channel {
+    display: flex;
+    flex-direction: column;
+    margin: 50px;
+}
+
+.modal-form__create-channel input {
+    padding: 4px;
+    border: 0.5px solid #ccc;
+    background-color: #ffffffc7;
+    animation: slideInFromLeft 0.7s ease-out forwards;
+}
+
+.btn-modal-create-channel{
+    margin: auto;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    width: 90px;
+    padding: 2px;
+    margin-top: 10px;
+    animation: slideInFromLeft 0.7s ease-out forwards;
+}
+
+.btn-modal-create-channel:hover{
+    background-color: #ffffff5e;
+}
+
+
+
+
+
+
+
+
+
+
