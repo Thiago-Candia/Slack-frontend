@@ -1,7 +1,7 @@
-import React from "react";
-import WorkspaceChat from "../Components/WorkspaceChat.jsx";
-import WorksapceChatHeader from "../Components/WorksapceChatHeader.jsx";
-import "../Styles/styles.css";
+import React from "react"
+import WorkspaceChat from "../Components/WorkspaceChat.jsx"
+import WorksapceChatHeader from "../Components/WorksapceChatHeader.jsx"
+import "../Styles/styles.css"
 
 const WorkspaceScreen = () => {
 

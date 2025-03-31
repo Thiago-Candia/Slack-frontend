@@ -5,10 +5,6 @@ const WorkspaceList = () => {
 
     const { user, workspaces } = useContext(WorkspaceContext)
 
-    console.log(user)
-    console.log(workspaces)
-    console.log(Array.isArray(workspaces))
-
     return (
         <div className="workspace-list-container">
             <span className='workspace-list-container-title'>

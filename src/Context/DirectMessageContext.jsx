@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ProfileContext } from "./ProfileContext";
 import { useApiRequest } from "../hooks/useApiRequest";

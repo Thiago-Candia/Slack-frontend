@@ -28,7 +28,7 @@ const CreateWorkspaceScreen = () => {
                     required
                     />
                     <button type='submit' disabled={isCreatingWorkspace}>
-                        {isCreatingWorkspace ? 'Cargando...' : 'Crear espacio de trabajo'}
+                        <span>{isCreatingWorkspace ? 'Cargando...' : 'Crear espacio de trabajo'}</span>
                     </button>
                     {error && <p>{error}</p>}
                 </form>

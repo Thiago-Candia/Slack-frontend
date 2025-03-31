@@ -24,18 +24,14 @@ const NavHome = () => {
                 </div>
                 {/* Botones para desktop */}
                 <div className='nav-home-item nav-home-item-btn desktop-menu'>
-                    <Link to={'/home'}>
-                        <button className='btn-nav-home text-nav btn-nav-home-ventas'>
-                            <span className='text-nav'>Hablar con ventas</span>
-                        </button>
-                    </Link>
-                    <Link to={'/home'}>
-                        <button className='btn-nav-home text-nav btn-nav-home-create-workspace'>
-                            <Link to={'/new-workspace'}>
-                                <span className='text-nav'>Crear un nuevo espacio de trabajo</span>
-                            </Link>
-                        </button>
-                    </Link>
+                    <button className='btn-nav-home text-nav btn-nav-home-ventas'>
+                        <span className='text-nav'>Hablar con ventas</span>
+                    </button>
+                    <button className='btn-nav-home text-nav btn-nav-home-create-workspace'>
+                        <Link to={'/new-workspace'}>
+                            <span className='text-nav'>Crear un nuevo espacio de trabajo</span>
+                        </Link>
+                    </button>
                 </div>
                 {/* Menú hamburguesa para mobile */}
                 <div className='mobile-menu-btn' onClick={() => setIsMenuOpen(!isMenuOpen)}>
