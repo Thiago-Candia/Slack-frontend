@@ -32,7 +32,7 @@ import { HiHashtag } from "react-icons/hi2";
 import { IoRocketOutline } from "react-icons/io5";
 import { FaRegPenToSquare } from "react-icons/fa6";
 import { IoSendSharp } from "react-icons/io5";
-
+import { FaArrowRightLong } from "react-icons/fa6";
 
 export const Icons = {
     Google: FcGoogle,
@@ -68,6 +68,7 @@ export const Icons = {
     Hashtag: HiHashtag,
     Rocket: IoRocketOutline,
     PenNewMsg: FaRegPenToSquare,
-    SendMessage: IoSendSharp
+    SendMessage: IoSendSharp,
+    ArrowRight: FaArrowRightLong
 
 }

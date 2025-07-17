@@ -19,7 +19,6 @@ const DirectMessageProvider = ({ children }) => {
         const fetchMessages = async () => {
             await getRequest(`/${user_id}`)
         }
-
         fetchMessages()
     }, [user_id])
 
@@ -30,10 +29,10 @@ const DirectMessageProvider = ({ children }) => {
     }, [responseApiState.data])
 
     const sendDirectMessage = async (content) => {
-        if (!user_id || !content) return;
-        await postRequest(`/${user_id}`, { content });
-        setMessages((prev) => [...prev, { sender: user._id, receiver: user_id, content }]);
-    };
+        if (!user_id || !content) return
+        await postRequest(`/${user_id}`, { content })
+        setMessages((prev) => [...prev, { sender: user._id, receiver: user_id, content }])
+    }
 
     return (
         <DirectMessageContext.Provider value={{ messages, sendDirectMessage }}>

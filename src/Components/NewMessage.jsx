@@ -3,12 +3,20 @@ import { useSendMessage } from "../Context/MessageSendContext"
 import { MessageContext } from "../Context/MessageContext"
 import "../Styles/styles.css"
 import { Icons } from "../Assets/Icons/Icons"
+import { useParams } from "react-router-dom"
 
 const NewMessage = () => {
 
     const { sendMessage, isSending, error } = useSendMessage()
     const { addMessage } = useContext(MessageContext)
     const [newMessage, setNewMessage] = useState("") 
+    const { channel_id } = useParams()
+
+
+    //Si no hay un canal seleccionado no se puede enviar mensaje
+    if(!channel_id){
+        return null
+    }
 
     const handleSendMessage = async (e) => {
         e.preventDefault()

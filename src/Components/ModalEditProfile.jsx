@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from 'react';
+import React, { useState, useContext, useRef, useEffect } from 'react';
 import { ProfileContext } from '../Context/ProfileContext';
 import { UpdateProfileContext } from '../Context/UpdateProfileContext';
 import { useForm } from '../hooks/useForm';
@@ -6,40 +6,52 @@ import '../Styles/styles.css';
 
 const ModalEditProfile = ({ isOpen, onClose }) => {
 
-    if (!isOpen) return null;
+    if (!isOpen) return null
 
-    const { updateProfile } = useContext(UpdateProfileContext);
-    const { user, setUser } = useContext(ProfileContext);
-    const fileInputRef = useRef(null);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
+    const { updateProfile } = useContext(UpdateProfileContext)
+    const { user, setUser } = useContext(ProfileContext)
+
+    const fileInputRef = useRef(null)
+    const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState(null)
+    const [avatarPreview, setAvatarPreview] = useState(user?.profile_avatar_base64 || '')
 
     const { formState, handleChangeInput } = useForm({
         username: user?.username || '',
         profile_avatar_base64: user?.profile_avatar_base64 || ''
-    });
+    })
+
+
+    useEffect(() => {
+        if(formState.profile_avatar_base64){
+            setAvatarPreview(formState.profile_avatar_base64)
+        }
+    }, [formState.profile_avatar_base64])
+
 
     const handleSave = async () => {
-        setIsLoading(true);
-        setError(null);
+        setIsLoading(true)
+        setError(null)
         try {
             const response = await updateProfile({
                 username: formState.username,
                 profile_avatar_base64: formState.profile_avatar_base64
-            });
-
+            })
             if (response?.payload?.user) {
-                setUser(response.payload.user);
+                const updateUser = response.payload.user
+                localStorage.setItem('user', JSON.stringify(updateUser))
+                setUser(updateUser)
             }
-
-            onClose();
-        } catch (error) {
+            onClose()
+        } 
+        catch (error) {
             console.log('Error al guardar los cambios:', error);
             setError(error.message || 'Error al actualizar el perfil');
-        } finally {
+        } 
+        finally {
             setIsLoading(false);
         }
-    };
+    }
 
     return (
         <div className="modal-edit-profile">
@@ -61,7 +73,7 @@ const ModalEditProfile = ({ isOpen, onClose }) => {
                         style={{ cursor: 'pointer' }}
                     >
                         <img 
-                            src={formState.profile_avatar_base64 || "https://st3.depositphotos.com/9998432/13335/v/450/depositphotos_133352156-stock-illustration-default-placeholder-profile-icon.jpg"} 
+                            src={avatarPreview || "https://st3.depositphotos.com/9998432/13335/v/450/depositphotos_133352156-stock-illustration-default-placeholder-profile-icon.jpg"} 
                             alt="Avatar"
                         />
                     </div>
@@ -70,7 +82,19 @@ const ModalEditProfile = ({ isOpen, onClose }) => {
                         type="file"
                         name="profile_avatar_base64"
                         ref={fileInputRef}
-                        onChange={handleChangeInput}
+                        onChange={(e) => {
+                            const file = e.target.files[0]
+                            const reader = new FileReader()
+                            reader.onloadend = () => {
+                                handleChangeInput({
+                                    target: {
+                                        name: 'profile_avatar_base64',
+                                        value: reader.result
+                                    }
+                                })
+                            }
+                            if(file) reader.readAsDataURL(file)
+                        }}
                         style={{ display: 'none' }}
                     />
                 </div>
@@ -85,7 +109,7 @@ const ModalEditProfile = ({ isOpen, onClose }) => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default ModalEditProfile;
+export default ModalEditProfile

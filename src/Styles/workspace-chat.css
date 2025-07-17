@@ -1,5 +1,5 @@
 
-.sidbar-desktop{
+.sidebar-desktop{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -9,25 +9,49 @@
     padding: 12px 4px;
 }
 
-.sidbar-desktop-item{
+.sidebar-desktop-item{
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 12px;
 }
 
-.button-sidebar-desktop{
+.container-btn-sidebar-desktop{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
+    margin-top: 10px;
     width: 60px;
     height: 60px;
     transition: background 0.2s ease-in-out;
     border-radius: 8px;
 }
 
-.button-sidebar-desktop:hover {
+.container-btn-sidebar-desktop span{
+    font-size: 14px;
+    color: #fff;
+}
+
+.btn-sidebar-desktop{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    transition: background 0.2s ease-in-out;
+    border-radius: 12px;
+}
+
+.btn-sidebar-desktop i{
+    font-size: 18px;
+    color: #fff;
+}
+
+
+.btn-sidebar-desktop:hover {
     background: rgba(255, 255, 255, 0.1);
 }
 
@@ -65,7 +89,7 @@
 
 /* IMAGEN USUARIO Y PERFIL */
 
-.sidbar-desktop img{
+.sidebar-desktop img{
     width: 50px;
     height: 50px;
     border-radius: 8px ;

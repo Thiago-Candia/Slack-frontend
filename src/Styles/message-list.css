@@ -52,7 +52,6 @@
     max-width: 100%;
 }
 
-
 .message-sub_item{
     display: flex;
     flex-direction: column;
@@ -62,6 +61,12 @@
     flex: 1;
     min-width: 0;
 }
+
+.message-avatar-empty {
+    width: 30px;
+    height: 30px;
+}
+
 
 /* Message avatar */
 
@@ -85,3 +90,4 @@
     word-break: break-word;
     max-width: 100%; 
 }
+

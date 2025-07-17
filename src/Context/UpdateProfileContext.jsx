@@ -10,14 +10,20 @@ const UpdateProfileContextProvider = ({ children }) => {
     const { responseApiState, putRequest } = useApiRequest(ENVIROMENT.URL_API + "/api/profile")
 
     const updateProfile = async (body) => {
-        const token = localStorage.getItem("authorization_token");
-        await putRequest({
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(body)
-        })
+        const token = localStorage.getItem("authorization_token")
+        try{
+            const response = await putRequest({
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(body)
+            })
+            return response;
+        }
+        catch(error){
+            console.error("Error al actualizar el perfil:", error)
+        }
     }
 
     useEffect(() => {

@@ -18,22 +18,35 @@ const MessageList = () => {
         <div className="messages-body">
             <div className="messages-list-box">
                 {messages.length > 0 ? (
-                    messages.map((message) => (
+                    messages.map((message, index) => {
+                        const previousMessage = messages[index - 1]
+                        const isSameSenderAsPrevious = previousMessage && previousMessage.sender._id === message.sender._id
+                        return (
                         <div className="message-item" key={message._id}>
                             <div className="message-sub_item message-avatar-container">
-                                <img className="message-avatar" src={user?.profile_avatar_base64 || "https://st3.depositphotos.com/9998432/13335/v/450/depositphotos_133352156-stock-illustration-default-placeholder-profile-icon.jpg"}/>
-                            </div>
-                            <div className="message-sub_item">
-                                <div className="message-sender">
-                                    <span>{message.sender.username}</span>
-                                    {/* <span>{message.created_at}</span> */}
+                                {!isSameSenderAsPrevious ? (
+                                <img 
+                                    className="message-avatar" 
+                                    src={user?.profile_avatar_base64 || "https://st3.depositphotos.com/9998432/13335/v/450/depositphotos_133352156-stock-illustration-default-placeholder-profile-icon.jpg"}
+                                alt="avatar"
+                                />
+                                ) : (
+                                    <div className="message-avatar-empty" />
+                                )}
                                 </div>
+                                <div className="message-sub_item">
+                                {!isSameSenderAsPrevious && (
+                                    <div className="message-sender">
+                                        <span>{message.sender.username}</span>
+                                    </div>
+                                )}
                                 <div className="message-content">
                                     <p>{message.content}</p>
                                 </div>
                             </div>
-                        </div>
-                    ))
+                            </div>
+                    )
+                })
                 ) : (
                     <p>No hay mensajes</p>
                 )}

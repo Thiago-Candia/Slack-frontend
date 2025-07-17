@@ -1,5 +1,5 @@
 
-/* SCREENS */
+/* Components */
 
 @import url('normalize.css');
 
@@ -37,14 +37,16 @@
 
 @import url('create-workspace.css');
 
+@import url('learn-slack.css');
 
 
-/* RESPONSIVE */
+
+/* Responsive */
 
 @import url('responsive.css');
 
 
 
-/* FONTS */
+/* Fonts */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');

@@ -1,38 +1,23 @@
-import React,{ createContext, useEffect, useState } from "react";
-import { useApiRequest } from "../hooks/useApiRequest";
-import ENVIROMENT from "../config/enviroment";
-
+import React, { createContext, useState, useEffect } from 'react';
 
 export const ProfileContext = createContext()
 
-export const ProfileContextProvider = ({children}) => {
-
-    const [user, setUser] = useState()
-    const {responseApiState, getRequest } = useApiRequest(ENVIROMENT.URL_API + '/api/profile')
-
-    useEffect(() => {
-        const fetchProfile = async () => {
-            const token = localStorage.getItem("authorization_token")
-            await getRequest({
-                headers: {
-                    Authorization: `Bearer ${token}`
-                },
-            })
-        }
-        fetchProfile()
-    }, [])
-
-    useEffect(() => {
-        if(responseApiState.data && responseApiState.data.payload){
-            setUser(responseApiState.data.payload.user)
-        }
+export const ProfileContextProvider = ({ children }) => {
+    const [user, setUser] = useState(() => {
+        // Cargar usuario desde localStorage si existe
+        const savedUser = localStorage.getItem('user')
+        return savedUser ? JSON.parse(savedUser) : null
     })
 
+    // Función para actualizar el usuario de forma consistente
+    const updateUser = (userData) => {
+        setUser(userData)
+        localStorage.setItem('user', JSON.stringify(userData))
+    }
 
     return (
-        <ProfileContext.Provider value={{user, setUser}}>  
+        <ProfileContext.Provider value={{ user, setUser: updateUser }}>
             {children}
         </ProfileContext.Provider>
     )
-
 }

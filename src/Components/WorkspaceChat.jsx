@@ -14,8 +14,6 @@ const WorkspaceChat = () => {
     const { workspace_id, channel_id, user_id } = useParams()
     const { workspaces } = useContext(WorkspaceContext)
     const { user } = useContext(ProfileContext)
-
-
     const {isOpen: isProfileModalOpen,  openModal: openProfileModal, closeModal: closeProfileModal} = useModal()
     const [isModalOpen, setIsModalOpen] = useState(false) //Estado para controlar el modal
 
@@ -27,38 +25,50 @@ const WorkspaceChat = () => {
 
     return (
     <>
-        <div className="sidbar-desktop">
-            <div className="sidbar-desktop-item">
-                <button className="button-sidebar-desktop btn-config"> 
-                    Icono 
+        <div className="sidebar-desktop">
+            <div className="sidebar-desktop-item">
+                
+                <button className="button-item-sidebar-desktop btn-config"> 
+                    Icono Slack 
                 </button>
-                <button onClick={goHome} className="button-sidebar-desktop btn-config"> 
-                    <i><Icons.Home/></i>
-                    <span>
-                        Inicio
-                    </span>
-                </button>
-                <button className="button-sidebar-desktop btn-config"> 
-                    <i><Icons.Messages/> </i>
-                    <span>Mensajes directos</span>
-                </button>
-                <button className="button-sidebar-desktop btn-config"> 
-                    <i><Icons.Notification/> </i>
+
+                <div className="container-btn-sidebar-desktop btn-config">
+                    <button onClick={goHome} className="btn-sidebar-desktop btn-config"> 
+                        <i><Icons.Home/></i>
+                    </button>
+                    <span>Inicio</span>
+                </div>
+
+                <div className="container-btn-sidebar-desktop">
+                    <button className="btn-sidebar-desktop btn-config"> 
+                        <i><Icons.Messages/></i>
+                    </button>
+                    <span className="sidebar-text">Mensajes directos</span>
+                </div>
+
+                <div className="container-btn-sidebar-desktop">
+                    <button className="btn-sidebar-desktop btn-config"> 
+                        <i><Icons.Notification/> </i>
+                    </button>
                     <span>Actividad</span>
-                </button>
-                <button className="button-sidebar-desktop btn-config"> 
+                </div>
+
+                <div className="container-btn-sidebar-desktop">
+                    <button className="btn-sidebar-desktop btn-config"> 
                     <i><Icons.MoreOptions/> </i>
+                    </button>
                     <span>Mas</span>
-                </button>
+                </div>
+
             </div>
             <div>
-                <button className="button-sidebar-desktop btn-config button-plus-sidebar-desktop">
+                <button className="btn-sidebar-desktop btn-config button-plus-sidebar-desktop">
                     <i><Icons.Plus/></i>
                 </button>
-                <button className="button-sidebar-desktop btn-config" onClick={openProfileModal}>
+                <button className="btn-sidebar-desktop btn-config" onClick={openProfileModal}>
                     <img src={user?.profile_avatar_base64 || "https://st3.depositphotos.com/9998432/13335/v/450/depositphotos_133352156-stock-illustration-default-placeholder-profile-icon.jpg"}/>
                 </button>
-                        {/* Modal para ver perfil */}
+                    {/* Modal para ver perfil */}
                 <ModalProfileUser isOpen={isProfileModalOpen} onClose={closeProfileModal} user={user} />
             </div>
         </div>
@@ -67,7 +77,7 @@ const WorkspaceChat = () => {
             <div className="sidebar-item">
                 <div className="sidebar-item-header">
                     <button className="btn-config btn-sidebar-header text">
-                        <span>Nombre del workspace</span>
+                        <span>{workspace_id.nombre}</span>
                     </button>
                     <button className="btn-config text btn-sidebar-header">
                         <i><Icons.PenNewMsg/></i>
@@ -85,8 +95,6 @@ const WorkspaceChat = () => {
                 <UserList/>
             </div>
         </div>
-
-
 
         <div className="chat-container">
             {user_id ? (

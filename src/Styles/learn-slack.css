@@ -1,0 +1,49 @@
+
+
+.text-card{
+    color: #000;
+}
+
+.learn-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.card-container{
+    display: flex;
+    flex-direction: column;
+    margin-top: 200px;
+    background-color: #f4e5e5;
+    border: 0.5px solid ;
+    margin: 50px;
+}
+
+.card-item{
+    justify-content: center;
+    width: 300px;
+    margin: 10px;
+}
+
+.card-item p{
+    font-size: 16px;
+}
+
+.card-item span{
+    color: #45454B;
+    font-size: 16px;
+}
+
+.card-item img{
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    width: 285px;
+    height: 200px;
+}
+
+
+
+
+
+
