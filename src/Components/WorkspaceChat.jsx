@@ -12,10 +12,16 @@ import { WorkspaceContext } from "../Context/WorkspaceContext.jsx";
 const WorkspaceChat = () => {
 
     const { workspace_id, channel_id, user_id } = useParams()
+
     const { workspaces } = useContext(WorkspaceContext)
+
     const { user } = useContext(ProfileContext)
+
     const {isOpen: isProfileModalOpen,  openModal: openProfileModal, closeModal: closeProfileModal} = useModal()
+
     const [isModalOpen, setIsModalOpen] = useState(false) //Estado para controlar el modal
+
+    const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false)
 
     const navigate = useNavigate()
 
@@ -27,48 +33,81 @@ const WorkspaceChat = () => {
     <>
         <div className="sidebar-desktop">
             <div className="sidebar-desktop-item">
-                
                 <button className="button-item-sidebar-desktop btn-config"> 
-                    Icono Slack 
+                    <Icons.Slack/>
                 </button>
 
                 <div className="container-btn-sidebar-desktop btn-config">
                     <button onClick={goHome} className="btn-sidebar-desktop btn-config"> 
-                        <i><Icons.Home/></i>
+                        <i>
+                            <Icons.Home/>
+                        </i>
                     </button>
-                    <span>Inicio</span>
+                    <span>
+                        Inicio
+                    </span>
                 </div>
 
                 <div className="container-btn-sidebar-desktop">
                     <button className="btn-sidebar-desktop btn-config"> 
-                        <i><Icons.Messages/></i>
+                        <i>
+                            <Icons.Messages/>
+                        </i>
                     </button>
                     <span className="sidebar-text">Mensajes directos</span>
                 </div>
 
                 <div className="container-btn-sidebar-desktop">
                     <button className="btn-sidebar-desktop btn-config"> 
-                        <i><Icons.Notification/> </i>
+                        <i>
+                            <Icons.Notification/>
+                        </i>
                     </button>
-                    <span>Actividad</span>
+                    <span>
+                        Actividad
+                    </span>
                 </div>
 
                 <div className="container-btn-sidebar-desktop">
                     <button className="btn-sidebar-desktop btn-config"> 
-                    <i><Icons.MoreOptions/> </i>
+                        <i>
+                            <Icons.MoreOptions/> 
+                        </i>
                     </button>
-                    <span>Mas</span>
+                    <span>
+                        Mas
+                    </span>
                 </div>
 
             </div>
             <div>
                 <button className="btn-sidebar-desktop btn-config button-plus-sidebar-desktop">
-                    <i><Icons.Plus/></i>
+                    <i>
+                        <Icons.Plus/>
+                    </i>
                 </button>
-                <button className="btn-sidebar-desktop btn-config" onClick={openProfileModal}>
+
+                <button className="btn-sidebar-desktop btn-config" onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}>
                     <img src={user?.profile_avatar_base64 || "https://st3.depositphotos.com/9998432/13335/v/450/depositphotos_133352156-stock-illustration-default-placeholder-profile-icon.jpg"}/>
+                    
                 </button>
                     {/* Modal para ver perfil */}
+                    <ul className={`profile-menu ${isProfileMenuOpen ? 'active' : ''}`}>
+                        <li className="li-profile-menu">Actualiza tu estado</li>
+                        <li className="li-profile-menu">Cambiar a ausente</li>
+                        <li className="li-profile-menu">Pausar las notificaciones</li>
+                        <hr />
+                        <li className="li-profile-menu" onClick={openProfileModal}>
+                            <button className="btn-config text">
+                                <span className="">
+                                    Perfil
+                                </span>
+                            </button>
+                        </li>
+                        <li className="li-profile-menu"> Preferencias</li>
+                        <hr />
+                        <li className="li-profile-menu">Cerrar sesion</li>
+                    </ul>
                 <ModalProfileUser isOpen={isProfileModalOpen} onClose={closeProfileModal} user={user} />
             </div>
         </div>

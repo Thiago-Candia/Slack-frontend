@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { Icons } from "../Assets/Icons/Icons"
 
@@ -40,7 +40,7 @@ const WorkspaceChatHeader = () => {
         <div className="workspace-header-chat-content-item pro-version">
             <button className="pro-button">
                 <Icons.Slack />
-            Versión de prueba de Pro de Slack
+                <span>Versión de prueba de Pro de Slack</span>
             </button>
             <button className="help-button">
                 <Icons.Help />

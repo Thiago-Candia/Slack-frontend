@@ -1,52 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
-/* Components */
-
+/* Foundations */
 @import url('normalize.css');
 
-@import url('home-screen.css');
-
+/* Authentication and workspace creation */
 @import url('login-screen.css');
-
 @import url('register-screen.css');
-
-@import url('workspace-screen.css');
-
-@import url('new.message.css');
-
-@import url('message-list.css'); 
-
-@import url('modal-create-channel.css');
-
-@import url('sidebar-list.css');
-
-@import url('modal-inivte-user.css');
-
-@import url('nav-home.css');
-
-@import url('workspace-list.css');
-
-@import url('workspace-chat-header.css');
-
-@import url('workspace-chat.css');
-
-@import url('modal-profile-user.css');
-
-@import url('modal-edit-profile.css');
-
 @import url('rewrite-password.css');
-
 @import url('create-workspace.css');
 
+/* Home */
+@import url('home-screen.css');
+@import url('nav-home.css');
+@import url('workspace-list.css');
+@import url('workspace-cta.css');
 @import url('learn-slack.css');
 
+/* Workspace chat */
+@import url('workspace-screen.css');
+@import url('new.message.css');
+@import url('message-list.css');
+@import url('modal-create-channel.css');
+@import url('sidebar-list.css');
+@import url('modal-inivte-user.css');
+@import url('workspace-chat-header.css');
+@import url('workspace-chat.css');
+@import url('modal-profile-user.css');
+@import url('modal-edit-profile.css');
 
-
-/* Responsive */
-
+/* Shared responsive fallbacks */
 @import url('responsive.css');
-
-
-
-/* Fonts */
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');

@@ -4,69 +4,101 @@
     width: 100%;
     background: #360D3A;
     padding: 6px 12px;
+    height: 52px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+}
+
+
+.workspace-header-chat-container,
+.new-message-container {
+    zoom: 100%;
+    /* Fuerza el tamaño sin cambiar con el zoom del navegador */
 }
 
 .workspace-header-chat-space {
     width: 70px;
+    flex-shrink: 0;
 }
 
 .workspace-header-chat-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    width: calc(100% - 70px);
+    height: 100%;
+    gap: 16px;
+    padding: 0 12px;
 }
 
     /* Botones de navegación */
 .nav-buttons {
     display: flex;
     gap: 8px;
+    align-items: center;
+    height: 100%;
+    flex-shrink: 0;
 }
 
 .nav-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+    flex-shrink: 0;
     background: transparent;
     border: none;
     color: white;
     cursor: pointer;
     font-size: 18px;
     padding: 4px;
-    transition: 0.3s;
+    width: 32px;
+    height: 32px;
 }
 
 .nav-button:hover {
     opacity: 0.8;
 }
 
-    /* Barra de búsqueda */
+/* Barra de búsqueda */
 .search-bar {
     display: flex;
     align-items: center;
     background: rgba(255, 255, 255, 0.1);
     padding: 6px 12px;
     border-radius: 6px;
-    flex: 1;
-    max-width: 400px;
+    height: 36px;
+    width: 380px;
+    flex-shrink: 0;
 }
 
 .search-bar input {
-    flex: 1;
     background: transparent;
     border: none;
     color: white;
     outline: none;
     font-size: 14px;
+    flex: 1;
 }
 
 .search-icon {
     color: white;
     margin-left: 6px;
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
 }
 
-    /* Botón de versión de prueba */
+/* Botón de versión de prueba */
 .pro-version {
     display: flex;
     align-items: center;
     gap: 8px;
+    flex-shrink: 0;
+    height: 100%;
 }
 
 .pro-button {
@@ -77,6 +109,16 @@
     border-radius: 6px;
     cursor: pointer;
     font-size: 14px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.pro-button span {
+    margin-left: 0;
 }
 
 .help-button {
@@ -85,4 +127,10 @@
     color: white;
     cursor: pointer;
     font-size: 18px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
 }

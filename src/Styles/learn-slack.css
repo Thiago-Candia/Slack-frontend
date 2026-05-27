@@ -1,49 +1,90 @@
-
-
-.text-card{
-    color: #000;
+.learning {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.35rem;
 }
 
-.learn-container{
+.learning-card {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-.card-container{
-    display: flex;
+    overflow: hidden;
     flex-direction: column;
-    margin-top: 200px;
-    background-color: #f4e5e5;
-    border: 0.5px solid ;
-    margin: 50px;
+    min-height: 21.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--color-white);
+    box-shadow: 0 0.5rem 1.5rem rgb(22 8 26 / 12%);
+    transition: transform 180ms ease, box-shadow 180ms ease;
 }
 
-.card-item{
-    justify-content: center;
-    width: 300px;
-    margin: 10px;
+.learning-card:hover {
+    box-shadow: 0 0.9rem 1.8rem rgb(22 8 26 / 22%);
+    transform: translateY(-0.2rem);
 }
 
-.card-item p{
-    font-size: 16px;
+.learning-card__image {
+    width: 100%;
+    aspect-ratio: 1.55;
+    object-fit: cover;
 }
 
-.card-item span{
-    color: #45454B;
-    font-size: 16px;
-}
-
-.card-item img{
+.learning-card__body {
     display: flex;
-    margin: auto;
-    justify-content: center;
-    width: 285px;
-    height: 200px;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.65rem;
+    padding: 1.1rem 1.15rem;
 }
 
+.learning-card__category {
+    color: var(--color-muted);
+    font-size: 0.82rem;
+    font-weight: 600;
+}
 
+.learning-card__title {
+    color: var(--color-ink);
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
 
+.learning-card__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-top: auto;
+    color: var(--color-slack-button);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
 
+.learning-card__link svg {
+    flex-shrink: 0;
+    font-size: 1rem;
+}
 
+@media (max-width: 58rem) {
+    .learning {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 
+    .learning-card:last-child {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 38rem) {
+    .learning {
+        grid-template-columns: 1fr;
+    }
+
+    .learning-card:last-child {
+        grid-column: auto;
+    }
+
+    .learning-card {
+        min-height: 0;
+    }
+}

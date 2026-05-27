@@ -47,22 +47,23 @@ export const useApiRequest = (url) => {
     }
 
     // Método PUT para actualizar datos
-    const putRequest = async (body) => {
+    const putRequest = async (config) => {
         try {
             setResponseApiState({ ...initialResponseApiState, loading: true })
 
             const response = await fetch(url, {
                 method: 'PUT',
-                headers: {
+                headers: config.headers || {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(body)
+                body: typeof config.body === 'string' ? config.body : JSON.stringify(config.body)
             })
 
             const data = await response.json()
 
             if (data.ok) {
                 setResponseApiState((prevState) => ({ ...prevState, data: data }))
+                return data
             } 
             else {
                 throw new ServerError(data.message, data.status)
@@ -73,6 +74,7 @@ export const useApiRequest = (url) => {
                 ...prevState,
                 error: error.status ? error.message : 'No se pudo enviar la información al servidor'
             }))
+            throw error
         } 
         finally {
             setResponseApiState((prevState) => ({ ...prevState, loading: false }));

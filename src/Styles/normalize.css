@@ -1,42 +1,98 @@
+:root {
+    --board-slack: #481a54;
+    --blue-edit: #3faede;
+    --black-bgc: #1a1d21;
+    --color-white: #ffffff;
+    --color-ink: #1d1c1d;
+    --color-muted: #616061;
+    --color-border: #e5e5e5;
+    --color-soft-panel: #f4eef5;
+    --color-accent: #36c5f0;
+    --color-error: #c53030;
+    --color-slack-button: #611f69;
+    --color-slack-button-hover: #4a154b;
+}
 
-* {
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;
+}
+
+body {
+    min-width: 18.75rem;
+    margin: 0;
+    color: var(--color-ink);
+    font-family: 'Inter', Arial, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+#root {
+    min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+p {
+    margin: 0;
+}
+
+ul,
+ol {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
-}
-
-:root{
-    --board-slack: #481A54;
-    --blue-edit: #3FAEDE;
-}
-
-ul{
     list-style: none;
 }
 
+img {
+    display: block;
+    max-width: 100%;
+}
 
-.btn-config{
-    cursor: pointer;
+a {
+    color: inherit;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+button {
+    border: 0;
     background-color: transparent;
-    border: none;
-}
-
-.btn-close-config{
-    width: 40px;
-    margin: 2px;
-    border-radius: 20px;
-    height: 40px;
-    color: #000000;
-    background-color: transparent ;
-    font-size: 20px;
     cursor: pointer;
-    border: none;
+}
+
+.btn-config {
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.btn-close-config {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: 0.125rem;
+    border: 0;
+    border-radius: 1.25rem;
+    background-color: transparent;
+    color: #000000;
+    font-size: 1.25rem;
+    font-weight: 700;
     text-decoration: none;
-    font-weight: bold;
 }
 
-.text{
-    color: #D1D2D3;
+.text {
+    color: var(--color-white);
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 1rem;
 }
-

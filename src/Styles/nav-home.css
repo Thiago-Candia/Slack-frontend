@@ -1,135 +1,208 @@
-/* Estilos base del nav */
-.header-home {
-    display: flex;
-    flex-direction: row;
-    height: 80px;
-    width: 100%;
+.home-nav {
     position: relative;
+    padding: 1.25rem 1.5rem;
+    background-color: var(--board-slack);
 }
 
-.nav-home {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin: auto;
-    height: 100px;
-    width: 90%;
-    max-width: 1200px;
-}
-
-.nav-home-item {
+.home-nav__container {
     display: flex;
     align-items: center;
+    gap: 2rem;
+    width: min(100%, 75rem);
+    margin: 0 auto;
 }
 
-.nav-home-list {
+.home-nav__brand {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+}
+
+.home-nav__logo {
+    width: 6.8rem;
+    height: auto;
+}
+
+.home-nav__desktop {
     display: flex;
-    gap: 25px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    align-items: center;
 }
 
-.text-nav {
-    font-size: 15px;
-    color: #fff;
-    cursor: pointer;
+.home-nav__links {
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 2vw, 1.65rem);
 }
 
-/* Botones del nav */
-.btn-nav-home {
-    margin: 10px;
-    font-size: 12px;
-    padding: 12px;
-    border: 1px solid #fff;
-    font-weight: bold;
-    border-radius: 5px;
+.home-nav__link {
+    color: var(--color-white);
+    font-size: 0.9375rem;
+    font-weight: 600;
     white-space: nowrap;
-    background-color: transparent;
-    color: white;
-    cursor: pointer;
 }
 
-.btn-nav-home-ventas {
-    width: 200px;
+.home-nav__actions {
+    gap: 0.75rem;
+    margin-left: auto;
 }
 
-.btn-nav-home-create-workspace {
-    width: 300px;
-    
+.home-nav__button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0.7rem 1.15rem;
+    border: 0.0625rem solid var(--color-white);
+    border-radius: 0.3rem;
+    color: var(--color-white);
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
 }
 
+.home-nav__button--primary {
+    min-width: 15.5rem;
+    background-color: var(--color-white);
+    color: var(--board-slack);
+}
 
-/* Menú hamburguesa - oculto por defecto */
-.mobile-menu-btn {
+.home-nav__button--secondary {
+    min-width: 10.5rem;
+}
+
+.home-nav__button:hover,
+.home-nav__button:focus-visible {
+    background-color: var(--color-white);
+    color: var(--board-slack);
+}
+
+.home-nav__button:focus-visible,
+.home-nav__brand:focus-visible {
+    outline: 0.125rem solid var(--color-accent);
+    outline-offset: 0.18rem;
+}
+
+.home-nav__toggle {
     display: none;
-    cursor: pointer;
-    z-index: 1000;
+    margin-left: auto;
+    padding: 0.4rem;
+    color: var(--color-white);
 }
 
-.hamburger {
-    width: 30px;
-    height: 20px;
+.home-nav__hamburger {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    width: 1.7rem;
+    height: 1.25rem;
 }
 
-.hamburger span {
+.home-nav__hamburger span {
     display: block;
-    height: 3px;
     width: 100%;
-    background: white;
-    border-radius: 3px;
-    transition: all 0.3s ease;
+    height: 0.15rem;
+    border-radius: 1rem;
+    background-color: currentColor;
+    transition: transform 180ms ease, opacity 180ms ease;
 }
 
-.hamburger.open span:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
+.home-nav__hamburger--open span:nth-child(1) {
+    transform: translateY(0.55rem) rotate(45deg);
 }
 
-.hamburger.open span:nth-child(2) {
+.home-nav__hamburger--open span:nth-child(2) {
     opacity: 0;
 }
 
-.hamburger.open span:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
+.home-nav__hamburger--open span:nth-child(3) {
+    transform: translateY(-0.55rem) rotate(-45deg);
 }
 
-/* Menú desplegable mobile - oculto por defecto */
-.mobile-menu {
+.home-nav__mobile-menu {
     display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: #4A154B;
-    z-index: 999;
-    padding: 80px 20px 20px;
-    box-sizing: border-box;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
 }
 
-.mobile-menu.open {
-    transform: translateX(0);
+@media (max-width: 67.5rem) {
+    .home-nav__container {
+        gap: 1.25rem;
+    }
+
+    .home-nav__links {
+        gap: 1rem;
+    }
+
+    .home-nav__button--secondary {
+        display: none;
+    }
 }
 
-.mobile-menu ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
+@media (max-width: 50rem) {
+    .home-nav {
+        padding: 1.1rem 1rem;
+    }
 
-.mobile-menu li {
-    padding: 15px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
+    .home-nav__desktop {
+        display: none;
+    }
 
-.mobile-nav-btn {
-    display: block;
-    padding: 10px;
-    text-decoration: none;
+    .home-nav__toggle {
+        display: inline-flex;
+    }
+
+    .home-nav__mobile-menu {
+        position: absolute;
+        top: calc(100% - 0.4rem);
+        right: 1rem;
+        left: 1rem;
+        z-index: 10;
+        display: grid;
+        gap: 1rem;
+        padding: 1.25rem;
+        border-radius: 0.6rem;
+        background-color: var(--color-white);
+        box-shadow: 0 0.8rem 2rem rgb(0 0 0 / 22%);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-0.4rem);
+        transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    .home-nav__mobile-menu--open {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+
+    .home-nav__mobile-links {
+        display: grid;
+        gap: 0.1rem;
+    }
+
+    .home-nav__mobile-item {
+        padding: 0.7rem 0;
+        border-bottom: 0.0625rem solid var(--color-border);
+    }
+
+    .home-nav__mobile-menu .home-nav__link {
+        color: var(--color-ink);
+    }
+
+    .home-nav__mobile-actions {
+        display: grid;
+        gap: 0.65rem;
+    }
+
+    .home-nav__mobile-actions .home-nav__button {
+        width: 100%;
+        border-color: var(--board-slack);
+        color: var(--board-slack);
+    }
+
+    .home-nav__mobile-actions .home-nav__button--primary {
+        background-color: var(--board-slack);
+        color: var(--color-white);
+    }
 }

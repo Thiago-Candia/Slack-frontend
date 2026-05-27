@@ -8,11 +8,8 @@ export const CreateWorkspaceContext = createContext();
 export const CreateWorkspaceContextProvider = ({ children }) => {
 
     const [isCreatingWorkspace, setIsCreatingWorkspace] = useState(false);
-
     const [error, setError] = useState(null)
-
     const { setWorkspaces } = useContext(WorkspaceContext)
-
     const { postRequest } = useApiRequest(`${ENVIROMENT.URL_API}/api/workspaces`)
 
     const createWorkspace = async (workspace_name) => {

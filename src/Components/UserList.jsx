@@ -18,7 +18,9 @@ const UserList = () => {
         <>
             <div className='sidebar-list-title'>
                 <button className='btn-config'>
-                    <i><Icons.ArrowDown/></i>
+                    <i>
+                        <Icons.ArrowDown/>
+                    </i>
                 </button>
                 <span>Mensajes directos</span>
             </div>
@@ -38,7 +40,9 @@ const UserList = () => {
             </ul>
             <div className='invite-channel container-btn-list'>
                 <button className='btn-config btn-list-sidebar text' onClick={openInviteModal}>
-                    <i><Icons.Plus/></i>
+                    <i>
+                        <Icons.Plus/>
+                    </i>
                     <span>Invitar a personas</span>
                 </button>
             </div>

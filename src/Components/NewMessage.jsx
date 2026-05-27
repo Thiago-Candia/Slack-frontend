@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react"
+import React, { useRef, useContext, useState } from "react"
 import { useSendMessage } from "../Context/MessageSendContext"
 import { MessageContext } from "../Context/MessageContext"
 import "../Styles/styles.css"
@@ -7,11 +7,20 @@ import { useParams } from "react-router-dom"
 
 const NewMessage = () => {
 
+    //Envío de mensajes
     const { sendMessage, isSending, error } = useSendMessage()
-    const { addMessage } = useContext(MessageContext)
-    const [newMessage, setNewMessage] = useState("") 
-    const { channel_id } = useParams()
 
+    //Mensajes
+    const { addMessage } = useContext(MessageContext)
+
+    //Contenido del nuevo mensaje
+    const [newMessage, setNewMessage] = useState("") 
+
+    //Referencia al input de envio de mensaje
+    const inputRef  = useRef(null)
+
+    //Obtener el id del canal
+    const { channel_id } = useParams()
 
     //Si no hay un canal seleccionado no se puede enviar mensaje
     if(!channel_id){
@@ -26,8 +35,9 @@ const NewMessage = () => {
                 console.log("Mensaje enviado:", sentMessage)
                 if(sentMessage){
                     addMessage(sentMessage)
+                    setTimeout(() => inputRef.current?.focus(), 0);
                 }
-                setNewMessage("")
+                setNewMessage("");
             } 
             catch(error) {
                 console.log("Error enviando mensaje:", error)
@@ -87,6 +97,7 @@ const NewMessage = () => {
             <div className="new-message-item">
                 <form className="new-message-form" onSubmit={handleSendMessage}>
                     <input
+                        ref={inputRef}
                         type="text"
                         value={newMessage}
                         onChange={(e) => setNewMessage(e.target.value)}

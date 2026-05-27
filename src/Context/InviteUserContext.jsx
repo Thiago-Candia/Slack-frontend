@@ -8,15 +8,10 @@ export const InviteUserContext = createContext()
 export const InviteUserContextProvider = ({children}) => {
 
     const [isInviting, setIsInviting] = useState(false)
-
     const [isJoining, setIsJoining] = useState(false)
-
     const [error, setError] = useState(null)
-
     const { workspace_id } = useParams()
-
     const { postRequest } = useApiRequest(`${ENVIROMENT.URL_API}/api/workspaces/${workspace_id}/generate-invite`)
-
     const { postRequest: joinRequest } = useApiRequest(`${ENVIROMENT.URL_API}/api/workspaces/join`)
 
 
