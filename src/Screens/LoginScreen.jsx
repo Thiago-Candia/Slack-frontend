@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from 'react'
 import { useForm } from '../hooks/useForm'
-import ENVIROMENT from '../config/enviroment'
 import { useApiRequest } from '../hooks/useApiRequest'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../Context/AuthContext'
 import '../Styles/styles.css'
 import { WorkspaceContext } from '../Context/WorkspaceContext'
+import { authService } from '../services/auth.service'
 
 const LoginScreen = () => {
 
@@ -17,10 +17,8 @@ const LoginScreen = () => {
 
   const initialFormState = { email: '', password: '' }
 
-  useForm(initialFormState)
-
   const { formState, handleChangeInput } = useForm(initialFormState)
-  const { responseApiState, postRequest } = useApiRequest(ENVIROMENT.URL_API + '/api/auth/login')
+  const { responseApiState, execute: loginRequest } = useApiRequest(authService.login)
 
   useEffect(() => {
     if (responseApiState.data?.payload?.authorization_token) {
@@ -34,7 +32,7 @@ const LoginScreen = () => {
 
   const handleSubmitForm = async (e) => {
     e.preventDefault()
-    await postRequest(formState)
+    await loginRequest(formState)
   }
 
   return (

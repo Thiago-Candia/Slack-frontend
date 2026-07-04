@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 import { WorkspaceContext } from "./WorkspaceContext";
 import { useApiRequest } from "../hooks/useApiRequest";
-import ENVIROMENT from "../config/enviroment";
+import { workspaceService } from "../services/workspace.service";
 
 export const CreateWorkspaceContext = createContext();
 
@@ -10,20 +10,14 @@ export const CreateWorkspaceContextProvider = ({ children }) => {
     const [isCreatingWorkspace, setIsCreatingWorkspace] = useState(false);
     const [error, setError] = useState(null)
     const { setWorkspaces } = useContext(WorkspaceContext)
-    const { postRequest } = useApiRequest(`${ENVIROMENT.URL_API}/api/workspaces`)
+    const { execute: createWorkspaceRequest } = useApiRequest(workspaceService.create, { throwOnError: true })
 
     const createWorkspace = async (workspace_name) => {
         setIsCreatingWorkspace(true)
         setError(null)
 
         try {
-            const token = localStorage.getItem("authorization_token");
-            if (!token) {
-                throw new Error("No hay token disponible");
-            }
-
-            const response = await postRequest(
-                { name: workspace_name }, token)
+            const response = await createWorkspaceRequest(workspace_name)
 
             if (response?.payload?.new_workspace) {
                 setWorkspaces((prevState) => [...prevState, response.payload.new_workspace]);

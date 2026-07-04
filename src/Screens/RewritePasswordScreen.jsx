@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useApiRequest } from '../hooks/useApiRequest'
 import { useForm } from '../hooks/useForm'
-import ENVIROMENT from '../config/enviroment'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import '../Styles/styles.css'
+import { authService } from '../services/auth.service'
 
 const RewritePasswordScreen = () => {
 
@@ -23,7 +23,7 @@ const RewritePasswordScreen = () => {
     }
 
     const {formState, handleChangeInput} = useForm(initialFormState)
-    const {responseApiState, putRequest} = useApiRequest(ENVIROMENT.URL_API + '/api/auth/rewrite-password')
+    const {responseApiState, execute: rewritePasswordRequest} = useApiRequest(authService.rewritePassword)
 
     useEffect(
         () => {
@@ -35,7 +35,7 @@ const RewritePasswordScreen = () => {
     )
     const handleSubmitForm = async (e) => {
         e.preventDefault()
-        await putRequest({password: formState.password, reset_token}) 
+        await rewritePasswordRequest({password: formState.password, reset_token}) 
     }
 
     return (

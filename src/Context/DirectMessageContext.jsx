@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ProfileContext } from "./ProfileContext";
 import { useApiRequest } from "../hooks/useApiRequest";
-import ENVIROMENT from "../config/enviroment";
+import { directMessageService } from "../services/directMessage.service";
 
 export const DirectMessageContext = createContext();
 
@@ -12,25 +12,26 @@ const DirectMessageProvider = ({ children }) => {
     const { user } = useContext(ProfileContext)
     const [messages, setMessages] = useState([])
 
-    const { responseApiState, getRequest, postRequest } = useApiRequest(ENVIROMENT.URL_API + `/workspace/dm/${user_id}`)
+    const { responseApiState, execute: getDirectMessages } = useApiRequest(directMessageService.getByUser)
+    const { execute: sendDirectMessageRequest } = useApiRequest(directMessageService.send)
 
     useEffect(() => {
         if (!user_id) return
         const fetchMessages = async () => {
-            await getRequest(`/${user_id}`)
+            await getDirectMessages(user_id)
         }
         fetchMessages()
-    }, [user_id])
+    }, [user_id, getDirectMessages])
 
     useEffect(() => {
-        if (responseApiState.data?.messages) {
-            setMessages(responseApiState.data.messages)
+        if (responseApiState.data?.payload?.messages) {
+            setMessages(responseApiState.data.payload.messages)
         }
     }, [responseApiState.data])
 
     const sendDirectMessage = async (content) => {
         if (!user_id || !content) return
-        await postRequest(`/${user_id}`, { content })
+        await sendDirectMessageRequest(user_id, content)
         setMessages((prev) => [...prev, { sender: user._id, receiver: user_id, content }])
     }
 

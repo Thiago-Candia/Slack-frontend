@@ -1,115 +1,52 @@
-import React, { useState } from "react";
-import { ServerError } from "../utils/error.utils.js";
+import { useCallback, useState } from "react";
 
-export const useApiRequest = (url) => {
+const initialState = {
+    loading: false,
+    error: null,
+    data: null
+};
 
-    const initialResponseApiState = {
-        loading: false,
-        error: null,
-        data: null
-    };
+const normalizeError = (error) => ({
+    message: error.message || "Error inesperado",
+    status: error.status
+});
 
+export const useApiRequest = (requestFn, options = {}) => {
+    const { throwOnError = false } = options;
+    const [responseApiState, setResponseApiState] = useState(initialState);
 
-    const [responseApiState, setResponseApiState] = useState(initialResponseApiState);
-
-    // Método POST para enviar datos
-    const postRequest = async (body, token) => {
+    const execute = useCallback(async (...args) => {
         try {
-            setResponseApiState({ ...initialResponseApiState, loading: true });
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`
-                },
-                body: JSON.stringify(body)
+            setResponseApiState({ ...initialState, loading: true });
+
+            const data = await requestFn(...args);
+
+            setResponseApiState({
+                loading: false,
+                error: null,
+                data
             });
 
-            const data = await response.json();
+            return data;
+        } catch (error) {
+            const normalizedError = normalizeError(error);
 
-            if (data.ok) {
-                setResponseApiState((prevState) => ({ ...prevState, data: data}))
-                return data
-            } 
-            else {
-                throw new ServerError(data.message, data.status);
+            setResponseApiState({
+                loading: false,
+                error: normalizedError,
+                data: null
+            });
+
+            if (throwOnError) {
+                throw normalizedError;
             }
-        } 
-        catch (error) {
-            setResponseApiState((prevState) => ({
-                ...prevState,
-                error: error.status ? error.message : 'No se pudo enviar la información al servidor'
-            }))
-        } 
-        finally {
-            setResponseApiState((prevState) => ({ ...prevState, loading: false }))
+
+            return null;
         }
-    }
+    }, [requestFn, throwOnError]);
 
-    // Método PUT para actualizar datos
-    const putRequest = async (config) => {
-        try {
-            setResponseApiState({ ...initialResponseApiState, loading: true })
-
-            const response = await fetch(url, {
-                method: 'PUT',
-                headers: config.headers || {
-                    'Content-Type': 'application/json'
-                },
-                body: typeof config.body === 'string' ? config.body : JSON.stringify(config.body)
-            })
-
-            const data = await response.json()
-
-            if (data.ok) {
-                setResponseApiState((prevState) => ({ ...prevState, data: data }))
-                return data
-            } 
-            else {
-                throw new ServerError(data.message, data.status)
-            }
-        } 
-        catch (error) {
-            setResponseApiState((prevState) => ({
-                ...prevState,
-                error: error.status ? error.message : 'No se pudo enviar la información al servidor'
-            }))
-            throw error
-        } 
-        finally {
-            setResponseApiState((prevState) => ({ ...prevState, loading: false }));
-        }
-    }
-
-    // Método GET para obtener datos
-    const getRequest = async () => {
-        try {
-            setResponseApiState({ ...initialResponseApiState, loading: true });
-            const token = localStorage.getItem('authorization_token')
-            const response = await fetch(url, {
-                method: "GET",
-                headers: { 
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}` 
-                }
-            })
-            const data = await response.json();
-            if (data.ok) {
-                setResponseApiState({ data, loading: false, error: null });
-            } else {
-                throw new ServerError(data.message, data.status);
-            }
-        } 
-        catch (error) {
-            setResponseApiState((prevState) => ({
-                ...prevState,
-                error: error.status ? error.message : "No se pudo obtener la información del servidor"
-            }));
-        } 
-        finally {
-            setResponseApiState((prevState) => ({ ...prevState, loading: false }));
-        }
-    }
-
-    return { responseApiState, postRequest, putRequest, getRequest }
-}
+    return {
+        responseApiState,
+        execute
+    };
+};

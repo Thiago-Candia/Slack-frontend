@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useApiRequest } from '../hooks/useApiRequest'
 import { useForm } from '../hooks/useForm'
-import ENVIROMENT from '../config/enviroment'
 import { Link } from 'react-router-dom'
+import { authService } from '../services/auth.service'
 
 const ResetPasswordScreen = () => {
 
@@ -12,11 +12,11 @@ const ResetPasswordScreen = () => {
 
     const {formState, handleChangeInput} = useForm(initialFormState)
 
-    const {responseApiState, postRequest} = useApiRequest(ENVIROMENT.URL_API + '/api/auth/reset-password')
+    const {responseApiState, execute: resetPasswordRequest} = useApiRequest(authService.resetPassword)
 
     const handleSubmitForm = async (e) => {
         e.preventDefault()
-        await postRequest(formState)
+        await resetPasswordRequest(formState)
     }
 
 

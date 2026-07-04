@@ -1,8 +1,7 @@
 import React,{ createContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { useApiRequest } from "../hooks/useApiRequest"
-import ENVIROMENT from "../config/enviroment"
-import { useSendMessage } from "./MessageSendContext"
+import { channelService } from "../services/channel.service"
 
 export const MessageContext = createContext()
 
@@ -11,24 +10,17 @@ const MessageContextProvider = ({ children }) => {
     const { channel_id } = useParams()
     const [messages, setMessages] = useState([])
 
-    const { responseApiState, getRequest} = useApiRequest(
-        `${ENVIROMENT.URL_API}/api/channels/${channel_id}/messages`
-    )
+    const { responseApiState, execute: getMessages} = useApiRequest(channelService.getMessages)
 
 
     useEffect(() => {
         const fetchMessages = async () => {
             if (channel_id) {
-                const token = localStorage.getItem("authorization_token");
-                await getRequest({
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                })
+                await getMessages(channel_id)
             }
         }
         fetchMessages()
-    }, [channel_id])
+    }, [channel_id, getMessages])
 
     useEffect(() => {
         if (responseApiState.data?.payload?.messages) {

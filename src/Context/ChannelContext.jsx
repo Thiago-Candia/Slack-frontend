@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import ENVIROMENT from "../config/enviroment"
 import { useApiRequest } from "../hooks/useApiRequest"
+import { channelService } from "../services/channel.service"
 
 export const ChannelContext = createContext()
 
@@ -15,19 +15,16 @@ const ChannelContextProvider = ({ children }) => {
     })
 
     const [loading, setLoading] = useState(true)
-    const { responseApiState, getRequest } = useApiRequest(`${ENVIROMENT.URL_API}/api/channels/${workspace_id}/channels`)
+    const { responseApiState, execute: getChannels } = useApiRequest(channelService.getByWorkspace)
 
     useEffect(() => {
         const fetchWorkspaceChannels = async () => {
-            const token = localStorage.getItem("authorization_token");
-            await getRequest({
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                }
-            })
+            setLoading(true)
+            await getChannels(workspace_id)
+            setLoading(false)
         }
         fetchWorkspaceChannels()
-    }, [workspace_id]) 
+    }, [workspace_id, getChannels]) 
 
 
     useEffect(() => {
@@ -36,7 +33,7 @@ const ChannelContextProvider = ({ children }) => {
             setChannels(savedChannels)
             localStorage.setItem(`channels_${workspace_id}`, JSON.stringify(savedChannels))
         }
-    }, [responseApiState.data])
+    }, [responseApiState.data, workspace_id])
 
     return (
         <ChannelContext.Provider value={{ channels, setChannels, loading}}>

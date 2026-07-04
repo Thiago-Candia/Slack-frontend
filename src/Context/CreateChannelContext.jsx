@@ -1,8 +1,8 @@
 import React, { createContext, useState, useContext } from "react"
 import { ChannelContext } from "./ChannelContext"
 import { useApiRequest } from "../hooks/useApiRequest"
-import ENVIROMENT from "../config/enviroment"
 import { useParams } from "react-router-dom"
+import { channelService } from "../services/channel.service"
 
 export const CreateChannel = createContext()
 
@@ -12,19 +12,14 @@ export const CreateChannelContextProvider = ({ children }) => {
     const { workspace_id } = useParams()
     const [error, setError] = useState(null)
     const { channels, setChannels } = useContext(ChannelContext)
-    const { postRequest } = useApiRequest(ENVIROMENT.URL_API + `/api/channels/${workspace_id}`)
+    const { execute: createChannelRequest } = useApiRequest(channelService.create, { throwOnError: true })
 
     const createChannel = async (channel_name) => {
         setIsCreatingChannel(true)
         setError(null)
 
         try {
-            const token = localStorage.getItem("authorization_token");
-            if (!token) {
-                throw new Error("No hay token disponible");
-            }
-
-            const response = await postRequest({ name: channel_name }, token)
+            const response = await createChannelRequest(workspace_id, channel_name)
 
             if (response?.payload?.new_channel) {
                 const updatedChannels = ([...channels, response.payload.new_channel])

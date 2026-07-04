@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState, useCallback } from "react"
-import ENVIROMENT from "../config/enviroment"
 import { useApiRequest } from "../hooks/useApiRequest"
+import { workspaceService } from "../services/workspace.service"
+import { AUTH_TOKEN_KEY } from "../services/httpClient"
 
 export const WorkspaceContext = createContext()
 
@@ -11,21 +12,13 @@ const WorkspaceContextProvider = ({ children }) => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
 
-    const { responseApiState, getRequest } = useApiRequest(ENVIROMENT.URL_API + "/api/workspaces")
+    const { responseApiState, execute: getWorkspaces } = useApiRequest(workspaceService.getAll)
 
     const loadWorkspaces = useCallback(async () => {
         try {
             setLoading(true)
             setError(null)
-            const token = localStorage.getItem("authorization_token")
-            await getRequest({
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
-            if (!token) {
-                throw new Error("No hay token disponible")
-            }
+            await getWorkspaces()
         } 
         catch (error) {
             console.log("Error loading workspaces:", error)
@@ -33,7 +26,7 @@ const WorkspaceContextProvider = ({ children }) => {
         finally {
             setLoading(false)
         }
-    }, [getRequest])
+    }, [getWorkspaces])
 
 
     useEffect(() => {
@@ -64,7 +57,7 @@ const WorkspaceContextProvider = ({ children }) => {
     }, [responseApiState])
 
     const logout = useCallback(() => {
-        localStorage.removeItem('authorization_token')
+        localStorage.removeItem(AUTH_TOKEN_KEY)
         setUser(null)
         setWorkspaces([])
     }, [])
@@ -76,7 +69,8 @@ const WorkspaceContextProvider = ({ children }) => {
             loading, 
             error, 
             loadWorkspaces, 
-            logout 
+            logout,
+            setWorkspaces
         }}>
             {children}
         </WorkspaceContext.Provider>

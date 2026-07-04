@@ -1,24 +1,17 @@
 import React,{ createContext, useEffect, useState } from "react"
 import { useApiRequest } from "../hooks/useApiRequest"
-import ENVIROMENT from "../config/enviroment"
+import { profileService } from "../services/profile.service"
 
 export const UpdateProfileContext = createContext();
 
 const UpdateProfileContextProvider = ({ children }) => {
 
     const [user, setUser] = useState(null)
-    const { responseApiState, putRequest } = useApiRequest(ENVIROMENT.URL_API + "/api/profile")
+    const { responseApiState, execute: updateProfileRequest } = useApiRequest(profileService.update, { throwOnError: true })
 
     const updateProfile = async (body) => {
-        const token = localStorage.getItem("authorization_token")
         try{
-            const response = await putRequest({
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(body)
-            })
+            const response = await updateProfileRequest(body)
             return response;
         }
         catch(error){

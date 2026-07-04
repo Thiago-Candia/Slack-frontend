@@ -1,7 +1,7 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useApiRequest } from "../hooks/useApiRequest";
-import ENVIROMENT from "../config/enviroment";
+import { workspaceService } from "../services/workspace.service";
 
 export const InviteUserContext = createContext()
 
@@ -11,19 +11,15 @@ export const InviteUserContextProvider = ({children}) => {
     const [isJoining, setIsJoining] = useState(false)
     const [error, setError] = useState(null)
     const { workspace_id } = useParams()
-    const { postRequest } = useApiRequest(`${ENVIROMENT.URL_API}/api/workspaces/${workspace_id}/generate-invite`)
-    const { postRequest: joinRequest } = useApiRequest(`${ENVIROMENT.URL_API}/api/workspaces/join`)
+    const { execute: generateInviteRequest } = useApiRequest(workspaceService.generateInvite, { throwOnError: true })
+    const { execute: joinWorkspaceRequest } = useApiRequest(workspaceService.join, { throwOnError: true })
 
 
     const inviteUser = async () => {
         setIsInviting(true)
         setError(null)
         try {
-            const token = localStorage.getItem("authorization_token");
-            if (!token) {
-                throw new Error("No hay token disponible");
-            }
-            const response = await postRequest({}, token)
+            const response = await generateInviteRequest(workspace_id)
             if(response?.payload?.invite_link){
                 return { invite_link : response.payload.invite_link }
             }
@@ -40,11 +36,7 @@ export const InviteUserContextProvider = ({children}) => {
         setIsJoining(true)
         setError(null)
         try {
-            const token = localStorage.getItem("authorization_token");
-            if (!token) {
-                throw new Error("No hay token disponible")
-            }
-            await joinRequest({}, token, `/${inviteToken}` )
+            await joinWorkspaceRequest(inviteToken)
         }
         catch (error){
             setError(error.message)

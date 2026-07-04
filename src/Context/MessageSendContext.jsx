@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 import { useApiRequest } from "../hooks/useApiRequest";
-import ENVIROMENT from "../config/enviroment";
 import { useParams } from "react-router-dom";
+import { channelService } from "../services/channel.service";
 
 export const MessageSendContext = createContext();
 
@@ -10,7 +10,7 @@ export const MessageSendContextProvider = ({ children }) => {
     const { channel_id } = useParams()
     const [isSending, setIsSending] = useState(false)
     const [error, setError] = useState(null)
-    const { postRequest } = useApiRequest(`${ENVIROMENT.URL_API}/api/channels/${channel_id}/messages`)
+    const { execute: sendMessageRequest } = useApiRequest(channelService.sendMessage, { throwOnError: true })
 
 const sendMessage = async (new_message) => {
         setIsSending(true)
@@ -21,12 +21,7 @@ const sendMessage = async (new_message) => {
             return
         }
         try {
-            const token = localStorage.getItem("authorization_token")
-            console.log("Token obtenido:", token)
-            if (!token) {
-                throw new Error("No hay token disponible")
-            }
-            const response = await postRequest({ content: new_message }, token)
+            const response = await sendMessageRequest(channel_id, new_message)
             if (response?.payload?.new_message) {
                 return response.payload.new_message
             }

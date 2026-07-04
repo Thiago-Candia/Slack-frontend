@@ -1,9 +1,9 @@
 import React from 'react'
-import ENVIROMENT from '../config/enviroment'
 import { useApiRequest } from '../hooks/useApiRequest'
 import { useForm } from '../hooks/useForm'
 import { Link } from 'react-router-dom'
 import '../Styles/styles.css'
+import { authService } from '../services/auth.service'
 
 const RegisterScreen = () => {
   const formInitialState = {
@@ -15,12 +15,12 @@ const RegisterScreen = () => {
 
   const { formState, handleChangeInput } = useForm(formInitialState)
 
-  const { responseApiState, postRequest } = useApiRequest(ENVIROMENT.URL_API + '/api/auth/register')
+  const { responseApiState, execute: registerRequest } = useApiRequest(authService.register)
 
   const handleSubmitForm = async (e) => {
     e.preventDefault()
     console.log(formState)
-    await postRequest(formState)
+    await registerRequest(formState)
   }
 
   return (

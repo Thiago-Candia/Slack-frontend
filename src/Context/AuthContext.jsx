@@ -1,16 +1,17 @@
 import React, { createContext, useEffect, useState } from "react";
+import { AUTH_TOKEN_KEY } from "../services/httpClient";
 
 export const AuthContext = createContext()
 
 const AuthContextProvider = ({children}) => {
 
-    let isAuthenticatedInitialState = localStorage.getItem('authorization_token')
+    let isAuthenticatedInitialState = Boolean(localStorage.getItem(AUTH_TOKEN_KEY))
 
     const [isAuthenticatedState, setIsAuthenticatedState] = useState(isAuthenticatedInitialState)
 
     useEffect(
         () => {
-            const token = localStorage.getItem('authorization_token')
+            const token = localStorage.getItem(AUTH_TOKEN_KEY)
             if(token){
                 setIsAuthenticatedState(true)
             }
@@ -19,12 +20,12 @@ const AuthContextProvider = ({children}) => {
     )
 
     const logout = () => {
-        localStorage.removeItem('authorization_token')
+        localStorage.removeItem(AUTH_TOKEN_KEY)
         setIsAuthenticatedState(false)
     }
 
     const login = (authorization_token) => {
-        localStorage.setItem('authorization_token', authorization_token)
+        localStorage.setItem(AUTH_TOKEN_KEY, authorization_token)
         setIsAuthenticatedState(true)
     }
 
