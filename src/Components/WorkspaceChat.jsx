@@ -2,24 +2,20 @@ import React, { useContext, useState } from "react";
 import { useParams, Routes, Route, useNavigate} from "react-router-dom";
 import MessageContextProvider from "../Context/MessageContext";
 import "../Styles/styles.css";
-import { ModalInviteUser, UserList, ChannelList, ModalCreateChannel, NewMessage, MessageList } from '../Components/index.js'
+import { UserList, ChannelList, NewMessage, MessageList } from '../Components/index.js'
 import useModal from "../hooks/useModal";
 import { Icons } from "../Assets/Icons/Icons.jsx";
 import { ProfileContext } from "../Context/ProfileContext.jsx";
 import ModalProfileUser from "./ModalProfileUser.jsx";
-import { WorkspaceContext } from "../Context/WorkspaceContext.jsx";
+import DirectMessageProvider from "../Context/DirectMessageContext.jsx";
 
 const WorkspaceChat = () => {
 
     const { workspace_id, channel_id, user_id } = useParams()
 
-    const { workspaces } = useContext(WorkspaceContext)
-
     const { user } = useContext(ProfileContext)
 
     const {isOpen: isProfileModalOpen,  openModal: openProfileModal, closeModal: closeProfileModal} = useModal()
-
-    const [isModalOpen, setIsModalOpen] = useState(false) //Estado para controlar el modal
 
     const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false)
 
@@ -91,7 +87,6 @@ const WorkspaceChat = () => {
                     <img src={user?.profile_avatar_base64 || "https://st3.depositphotos.com/9998432/13335/v/450/depositphotos_133352156-stock-illustration-default-placeholder-profile-icon.jpg"}/>
                     
                 </button>
-                    {/* Modal para ver perfil */}
                     <ul className={`profile-menu ${isProfileMenuOpen ? 'active' : ''}`}>
                         <li className="li-profile-menu">Actualiza tu estado</li>
                         <li className="li-profile-menu">Cambiar a ausente</li>
@@ -137,15 +132,13 @@ const WorkspaceChat = () => {
 
         <div className="chat-container">
             {user_id ? (
-                // Si es un chat directo, usar DirectMessageProvider
-                <DirectMessageProvider user_id={user_id}>
+                <DirectMessageProvider>
                     <Routes>
                         <Route path="/" element={<MessageList />} />
                     </Routes>
                     <NewMessage />
                 </DirectMessageProvider>
             ) : (
-                // Si es un canal, usar MessageContextProvider
                 <MessageContextProvider workspace_id={workspace_id} channel_id={channel_id}>
                     <Routes>
                         <Route path="/" element={<MessageList />} />

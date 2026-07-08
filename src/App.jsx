@@ -15,23 +15,18 @@ function App() {
     <div>
       <Routes>
         <Route path='/' element={<LoginScreen />} />
-        {/* HOME */}
         <Route path='/home' element={<HomeScreen />} />
-        {/* LOGIN */}
         <Route path='/login' element={<LoginScreen />} />
-        {/* REGISTER */}
         <Route path='/register' element={<RegisterScreen />} />
-        {/* COMP CREAR WORKSPACE */}
           <Route path='/new-workspace'element={
           <CreateWorkspaceContextProvider>
             <CreateWorkspaceScreen />
           </CreateWorkspaceContextProvider>
             }/>
-        {/* Ruta general para workspaces */}
         <Route path='/workspace/:workspace_id/*' element={<WorkspaceWrapper />} />
-        {/* Ruta para canales dentro de workspaces */}
         <Route path='/workspace/:workspace_id/channel/:channel_id/*' element={<WorkspaceWrapper />} />
-        <Route element={<ProtectedRoute />}> {/* Middleware */}
+        <Route path='/workspace/:workspace_id/dm/:user_id/*' element={<WorkspaceWrapper />} />
+        <Route element={<ProtectedRoute />}>
           <Route path='/reset-password' element={<ResetPasswordScreen />} />
         </Route>
         <Route path='/rewrite-password' element={<RewritePasswordScreen />} />

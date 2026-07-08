@@ -7,41 +7,29 @@ import { useParams } from "react-router-dom"
 
 const NewMessage = () => {
 
-    //Envío de mensajes
     const { sendMessage, isSending, error } = useSendMessage()
 
-    //Mensajes
     const { addMessage } = useContext(MessageContext)
 
-    //Contenido del nuevo mensaje
-    const [newMessage, setNewMessage] = useState("") 
+    const [newMessage, setNewMessage] = useState("")
 
-    //Referencia al input de envio de mensaje
     const inputRef  = useRef(null)
 
-    //Obtener el id del canal
-    const { channel_id } = useParams()
+    const { channel_id, user_id } = useParams()
 
-    //Si no hay un canal seleccionado no se puede enviar mensaje
-    if(!channel_id){
+    if(!channel_id && !user_id){
         return null
     }
 
     const handleSendMessage = async (e) => {
         e.preventDefault()
         if (newMessage.trim()) {
-            try {
-                const sentMessage = await sendMessage(newMessage.trim())
-                console.log("Mensaje enviado:", sentMessage)
-                if(sentMessage){
-                    addMessage(sentMessage)
-                    setTimeout(() => inputRef.current?.focus(), 0);
-                }
-                setNewMessage("");
-            } 
-            catch(error) {
-                console.log("Error enviando mensaje:", error)
+            const sentMessage = await sendMessage(newMessage.trim())
+            if(sentMessage){
+                addMessage(sentMessage)
+                setTimeout(() => inputRef.current?.focus(), 0)
             }
+            setNewMessage("")
         }
     }
     return (
