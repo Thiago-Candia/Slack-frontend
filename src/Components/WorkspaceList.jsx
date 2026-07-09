@@ -3,8 +3,13 @@ import { Link } from 'react-router-dom'
 import { WorkspaceContext } from '../Context/WorkspaceContext'
 import slackLogo from '../Assets/svg/slack-new-logo.svg'
 
+const getWorkspaceName = (workspace) => workspace.name?.trim() || 'Workspace sin nombre'
+
+const getMembersCount = (workspace) => Array.isArray(workspace.members) ? workspace.members.length : 0
+
 const WorkspaceList = () => {
     const { user, workspaces, loading, error } = useContext(WorkspaceContext)
+    const workspaceItems = Array.isArray(workspaces) ? workspaces.filter((workspace) => workspace?._id) : []
 
     return (
         <section className="workspace-panel" aria-labelledby="workspace-panel-title">
@@ -22,34 +27,46 @@ const WorkspaceList = () => {
                 {!loading && error && (
                     <p className="workspace-panel__status workspace-panel__status--error">{error}</p>
                 )}
-                {!loading && !error && workspaces.length === 0 && (
+                {!loading && !error && workspaceItems.length === 0 && (
                     <p className="workspace-panel__status">No perteneces a ning&uacute;n workspace a&uacute;n.</p>
                 )}
 
-                {!loading && !error && workspaces.length > 0 && (
+                {!loading && !error && workspaceItems.length > 0 && (
                     <ul className="workspace-panel__list">
-                        {workspaces.map((workspace) => (
-                            <li key={workspace._id} className="workspace-panel__item">
-                                <article className="workspace-item">
-                                    <div className="workspace-item__details">
-                                        <img
-                                            src={workspace.image || slackLogo}
-                                            className="workspace-item__logo"
-                                            alt=""
-                                        />
-                                        <div>
-                                            <h2 className="workspace-item__name">{workspace.name}</h2>
-                                            <p className="workspace-item__members">
-                                                {workspace.members.length} miembros
-                                            </p>
+                        {workspaceItems.map((workspace) => {
+                            const membersCount = getMembersCount(workspace)
+                            const workspaceName = getWorkspaceName(workspace)
+
+                            return (
+                                <li key={workspace._id} className="workspace-panel__item">
+                                    <article className="workspace-item">
+                                        <div className="workspace-item__details">
+                                            <img
+                                                src={workspace.image || slackLogo}
+                                                className="workspace-item__logo"
+                                                alt=""
+                                                loading="lazy"
+                                                decoding="async"
+                                                onError={(event) => {
+                                                    event.currentTarget.src = slackLogo
+                                                }}
+                                            />
+                                            <div className="workspace-item__content">
+                                                <h2 className="workspace-item__name" title={workspaceName}>
+                                                    {workspaceName}
+                                                </h2>
+                                                <p className="workspace-item__members">
+                                                    {membersCount} {membersCount === 1 ? 'miembro' : 'miembros'}
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <Link to={`/workspace/${workspace._id}`} className="workspace-item__button">
-                                        Iniciar Slack
-                                    </Link>
-                                </article>
-                            </li>
-                        ))}
+                                        <Link to={`/workspace/${workspace._id}`} className="workspace-item__button">
+                                            Iniciar Slack
+                                        </Link>
+                                    </article>
+                                </li>
+                            )
+                        })}
                     </ul>
                 )}
             </div>

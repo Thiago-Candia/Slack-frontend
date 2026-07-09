@@ -60,6 +60,10 @@
     gap: 1rem;
 }
 
+.workspace-item__content {
+    min-width: 0;
+}
+
 .workspace-item__logo {
     flex-shrink: 0;
     width: 3.25rem;
@@ -123,6 +127,10 @@
         align-items: stretch;
         flex-direction: column;
         padding: 1rem;
+    }
+
+    .workspace-item__details {
+        align-items: flex-start;
     }
 
     .workspace-item__button {

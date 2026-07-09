@@ -20,7 +20,8 @@
 
 .home-nav__logo {
     width: 6.8rem;
-    height: auto;
+    height: 1.75rem;
+    object-fit: contain;
 }
 
 .home-nav__desktop {
@@ -167,13 +168,15 @@
         opacity: 0;
         pointer-events: none;
         transform: translateY(-0.4rem);
-        transition: opacity 180ms ease, transform 180ms ease;
+        visibility: hidden;
+        transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
     }
 
     .home-nav__mobile-menu--open {
         opacity: 1;
         pointer-events: auto;
         transform: translateY(0);
+        visibility: visible;
     }
 
     .home-nav__mobile-links {
@@ -199,6 +202,10 @@
         width: 100%;
         border-color: var(--board-slack);
         color: var(--board-slack);
+    }
+
+    .home-nav__mobile-actions .home-nav__button--secondary {
+        display: inline-flex;
     }
 
     .home-nav__mobile-actions .home-nav__button--primary {

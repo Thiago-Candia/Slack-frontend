@@ -24,6 +24,12 @@
     object-fit: cover;
 }
 
+.workspace-cta__image--fallback {
+    padding: 1.25rem;
+    background-color: var(--color-soft-panel);
+    object-fit: contain;
+}
+
 .workspace-cta__text {
     flex: 1;
     color: var(--color-ink);
@@ -73,6 +79,7 @@
     .workspace-cta__image-wrapper {
         grid-row: span 2;
         min-height: 6.5rem;
+        aspect-ratio: 1;
     }
 
     .workspace-cta__button {
@@ -93,6 +100,7 @@
 
     .workspace-cta__image-wrapper {
         height: 7rem;
+        aspect-ratio: auto;
     }
 
     .workspace-cta__button {

@@ -26,6 +26,12 @@
     object-fit: cover;
 }
 
+.learning-card__image--fallback {
+    padding: 2rem;
+    background-color: var(--color-soft-panel);
+    object-fit: contain;
+}
+
 .learning-card__body {
     display: flex;
     flex: 1;

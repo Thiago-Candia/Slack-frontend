@@ -1,5 +1,6 @@
 .home {
     min-height: 100vh;
+    overflow-x: hidden;
     background: var(--board-slack);
     color: var(--color-white);
 }
@@ -52,5 +53,12 @@
 
     .home__content {
         gap: 1.5rem;
+    }
+}
+
+@media (max-width: 24rem) {
+    .home__main {
+        padding-right: 0.75rem;
+        padding-left: 0.75rem;
     }
 }
