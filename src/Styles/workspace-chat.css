@@ -52,9 +52,17 @@
     font-size: 1rem;
 }
 
-.btn-sidebar-desktop:hover:not(:disabled),
-.btn-sidebar-desktop:focus-visible,
 .container-btn-sidebar-desktop:hover {
+    background: rgb(255 255 255 / 10%);
+    outline: none;
+}
+
+.container-btn-sidebar-desktop:focus-within {
+    background: rgb(255 255 255 / 10%);
+}
+
+.workspace-profile-anchor > .btn-sidebar-desktop:hover:not(:disabled),
+.workspace-profile-anchor > .btn-sidebar-desktop:focus-visible {
     background: rgb(255 255 255 / 10%);
     outline: none;
 }
