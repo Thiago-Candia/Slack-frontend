@@ -8,12 +8,15 @@ import { Icons } from "../Assets/Icons/Icons.jsx";
 import { ProfileContext } from "../Context/ProfileContext.jsx";
 import ModalProfileUser from "./ModalProfileUser.jsx";
 import DirectMessageProvider from "../Context/DirectMessageContext.jsx";
+import { WorkspaceContext } from "../Context/WorkspaceContext.jsx";
 
 const WorkspaceChat = () => {
 
     const { workspace_id, channel_id, user_id } = useParams()
 
     const { user } = useContext(ProfileContext)
+    const { workspaces } = useContext(WorkspaceContext)
+    const currentWorkspace = workspaces.find((workspace) => workspace._id === workspace_id)
 
     const {isOpen: isProfileModalOpen,  openModal: openProfileModal, closeModal: closeProfileModal} = useModal()
 
@@ -111,7 +114,7 @@ const WorkspaceChat = () => {
             <div className="sidebar-item">
                 <div className="sidebar-item-header">
                     <button className="btn-config btn-sidebar-header text">
-                        <span>{workspace_id.nombre}</span>
+                        <span>{currentWorkspace?.name || "Workspace"}</span>
                     </button>
                     <button className="btn-config text btn-sidebar-header">
                         <i><Icons.PenNewMsg/></i>

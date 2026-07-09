@@ -15,21 +15,21 @@ function App() {
     <div>
       <Routes>
         <Route path='/' element={<LoginScreen />} />
-        <Route path='/home' element={<HomeScreen />} />
         <Route path='/login' element={<LoginScreen />} />
         <Route path='/register' element={<RegisterScreen />} />
-          <Route path='/new-workspace'element={
-          <CreateWorkspaceContextProvider>
-            <CreateWorkspaceScreen />
-          </CreateWorkspaceContextProvider>
-            }/>
-        <Route path='/workspace/:workspace_id/*' element={<WorkspaceWrapper />} />
-        <Route path='/workspace/:workspace_id/channel/:channel_id/*' element={<WorkspaceWrapper />} />
-        <Route path='/workspace/:workspace_id/dm/:user_id/*' element={<WorkspaceWrapper />} />
-        <Route element={<ProtectedRoute />}>
-          <Route path='/reset-password' element={<ResetPasswordScreen />} />
-        </Route>
+        <Route path='/reset-password' element={<ResetPasswordScreen />} />
         <Route path='/rewrite-password' element={<RewritePasswordScreen />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path='/home' element={<HomeScreen />} />
+          <Route path='/new-workspace'element={
+            <CreateWorkspaceContextProvider>
+              <CreateWorkspaceScreen />
+            </CreateWorkspaceContextProvider>
+          }/>
+          <Route path='/workspace/:workspace_id/*' element={<WorkspaceWrapper />} />
+          <Route path='/workspace/:workspace_id/channel/:channel_id/*' element={<WorkspaceWrapper />} />
+          <Route path='/workspace/:workspace_id/dm/:user_id/*' element={<WorkspaceWrapper />} />
+        </Route>
       </Routes>
     </div>
   )
