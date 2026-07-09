@@ -21,8 +21,6 @@
     }
 }
 
-/* Modal */
-
 .modal-container__create-channel{
     display: flex;
     position: fixed;
@@ -36,8 +34,6 @@
     opacity: 1;
     visibility: visible;
 }
-
-/* Modal container */
 
 .modal__create-channel{
     display: flex;
@@ -59,8 +55,6 @@
     margin-bottom: 1rem;
     animation: slideInFromLeft 0.7s ease-out forwards;
 }
-
-/* Modal close */
 
 .btn-modal-close{
     position: absolute;
@@ -110,6 +104,19 @@
 
 .btn-modal-create-channel:hover{
     background-color: #ffffff5e;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.modal-error {
+    margin-top: 8px;
+    color: var(--color-error);
+    font-size: 14px;
 }
 
 

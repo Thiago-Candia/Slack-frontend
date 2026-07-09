@@ -6,36 +6,41 @@ import { channelService } from "../services/channel.service"
 export const MessageContext = createContext()
 
 const MessageContextProvider = ({ children }) => {
-
     const { channel_id } = useParams()
     const [messages, setMessages] = useState([])
-
     const { responseApiState, execute: getMessages} = useApiRequest(channelService.getMessages)
-
 
     useEffect(() => {
         const fetchMessages = async () => {
-            if (channel_id) {
-                await getMessages(channel_id)
+            if (!channel_id) {
+                setMessages([])
+                return
             }
+
+            await getMessages(channel_id)
         }
+
         fetchMessages()
     }, [channel_id, getMessages])
 
     useEffect(() => {
         if (responseApiState.data?.payload?.messages) {
-            setMessages((prevState)=> [...responseApiState.data.payload.messages])
+            setMessages(responseApiState.data.payload.messages)
         }
     }, [responseApiState.data])
 
-    const addMessage = (new_message) => {
-        console.log("Nuevo mensaje agregado:", new_message)
-        setMessages((prevMessages) => [...prevMessages, new_message])
-        console.log("Mensajes actualizados:", messages)
+    const addMessage = (newMessage) => {
+        setMessages((prevMessages) => [...prevMessages, newMessage])
     }
 
     return (
-        <MessageContext.Provider value={{ messages, setMessages, addMessage}}>
+        <MessageContext.Provider value={{
+            messages,
+            setMessages,
+            addMessage,
+            loading: responseApiState.loading,
+            error: responseApiState.error?.message || null
+        }}>
             {children}
         </MessageContext.Provider>
     )

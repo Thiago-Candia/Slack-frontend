@@ -5,22 +5,15 @@ import { profileService } from "../services/profile.service"
 export const UpdateProfileContext = createContext();
 
 const UpdateProfileContextProvider = ({ children }) => {
-
     const [user, setUser] = useState(null)
     const { responseApiState, execute: updateProfileRequest } = useApiRequest(profileService.update, { throwOnError: true })
 
     const updateProfile = async (body) => {
-        try{
-            const response = await updateProfileRequest(body)
-            return response;
-        }
-        catch(error){
-            console.error("Error al actualizar el perfil:", error)
-        }
+        return updateProfileRequest(body)
     }
 
     useEffect(() => {
-        if (responseApiState.data && responseApiState.data.payload?.user) {
+        if (responseApiState.data?.payload?.user) {
             setUser(responseApiState.data.payload.user)
         }
     }, [responseApiState.data])

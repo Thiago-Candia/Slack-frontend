@@ -5,17 +5,22 @@ import "../Styles/styles.css"
 import { Icons } from "../Assets/Icons/Icons"
 import { useParams } from "react-router-dom"
 
+const toolbarActions = [
+    { label: "Negrita", Icon: Icons.Bold },
+    { label: "Cursiva", Icon: Icons.Italic },
+    { label: "Enlace", Icon: Icons.Link },
+    { label: "Lista numerada", Icon: Icons.ListNumber },
+    { label: "Lista", Icon: Icons.UnorderedList },
+    { label: "Código", Icon: Icons.Code }
+]
+
 const NewMessage = () => {
-
     const { sendMessage, isSending, error } = useSendMessage()
-
     const { addMessage } = useContext(MessageContext)
-
     const [newMessage, setNewMessage] = useState("")
-
-    const inputRef  = useRef(null)
-
+    const inputRef = useRef(null)
     const { channel_id, user_id } = useParams()
+    const trimmedMessage = newMessage.trim()
 
     if(!channel_id && !user_id){
         return null
@@ -23,120 +28,48 @@ const NewMessage = () => {
 
     const handleSendMessage = async (e) => {
         e.preventDefault()
-        if (newMessage.trim()) {
-            const sentMessage = await sendMessage(newMessage.trim())
-            if(sentMessage){
-                addMessage(sentMessage)
-                setTimeout(() => inputRef.current?.focus(), 0)
-            }
+
+        if (!trimmedMessage || isSending) {
+            return
+        }
+
+        const sentMessage = await sendMessage(trimmedMessage)
+
+        if(sentMessage){
+            addMessage(sentMessage)
             setNewMessage("")
+            setTimeout(() => inputRef.current?.focus(), 0)
         }
     }
+
     return (
         <div className="new-message-container">
-            <div className="new-message-item">
-                <button className="btn-config">
-                    <i>
-                        <Icons.Bold/>
-                    </i>
-                </button>
-                <button className="btn-config">
-                    <i>
-                        <Icons.Italic/>
-                    </i>
-                </button>
-                <button className="btn-config">
-                    <i>
-                        <Icons.Bold/>
-                    </i>
-                </button>
-                <div className="separator">|</div>
-                <button className="btn-config">
-                    <i>
-                        <Icons.Link/>
-                    </i>
-                </button>
-                <button className="btn-config">
-                    <i>
-                        <Icons.ListNumber/>
-                    </i>
-                </button>
-                <button className="btn-config">
-                    <i>
-                        <Icons.UnorderedList/>
-                    </i>
-                </button>
-                <button className="btn-config">
-                    <i>
-                        <Icons.ListBlock/>
-                    </i>
-                </button>
-                <button className="btn-config">
-                    <i>
-                        <Icons.Code/>
-                    </i>
-                </button>
-                <button className="btn-config">
-                    <i>
-                        <Icons.CodeBlock/>
-                    </i>
-                </button>
-            </div>
-            <div className="new-message-item">
-                <form className="new-message-form" onSubmit={handleSendMessage}>
-                    <input
-                        ref={inputRef}
-                        type="text"
-                        value={newMessage}
-                        onChange={(e) => setNewMessage(e.target.value)}
-                        placeholder="Escribe un mensaje..."
-                        disabled={isSending}
-                    />
-                    <button type="submit" disabled={isSending} className="btn-config btn-send-message" >
-                        <i><Icons.SendMessage/></i>
+            <div className="new-message-item new-message-toolbar" aria-label="Herramientas de formato">
+                {toolbarActions.map(({ label, Icon }) => (
+                    <button key={label} type="button" className="btn-config" aria-label={label} disabled>
+                        <i><Icon/></i>
                     </button>
-                </form>
-                {error && <p>{error}</p>}
+                ))}
             </div>
-            <div className="new-message-item">
-            <button className="btn-config">
-                <i>
-                    <Icons.Plus/>
-                </i>
-            </button>
-            <button className="btn-config">
-                <i>
-                    <Icons.TextAa/>
-                </i>
-            </button>
-            <button className="btn-config">
-                <i>
-                    <Icons.Emoji/>
-                </i>
-            </button>
-            <button className="btn-config">
-                <i>
-                    <Icons.Mention/>
-                </i>
-            </button>
-            <div className="separator">|</div>
-            <button className="btn-config">
-                <i>
-                    <Icons.Video/>
-                </i>
-            </button>
-            <button className="btn-config">
-                <i>
-                    <Icons.Audio/>
-                </i>
-            </button>
-            <div className="separator">|</div>
-            <button className="btn-config">
-                <i>
-                    <Icons.DirectAcces/>
-                </i>
-            </button>
-            </div>
+            <form className="new-message-form" onSubmit={handleSendMessage}>
+                <input
+                    ref={inputRef}
+                    type="text"
+                    value={newMessage}
+                    onChange={(e) => setNewMessage(e.target.value)}
+                    placeholder="Escribe un mensaje..."
+                    disabled={isSending}
+                />
+                <button
+                    type="submit"
+                    disabled={isSending || !trimmedMessage}
+                    className="btn-config btn-send-message"
+                    aria-label="Enviar mensaje"
+                >
+                    <i><Icons.SendMessage/></i>
+                </button>
+            </form>
+            {error && <p className="new-message-error">{error}</p>}
         </div>
     )
 }

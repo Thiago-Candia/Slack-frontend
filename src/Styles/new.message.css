@@ -1,75 +1,75 @@
+.new-message-container {
+    display: grid;
+    gap: 0.4rem;
+    margin: 0.75rem;
+    padding: 0.65rem;
+    border: 0.0625rem solid var(--color-ink);
+    border-radius: 0.75rem;
+    background-color: var(--color-ink);
+}
+
+.new-message-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 0.15rem;
+}
+
+.new-message-toolbar button,
+.new-message-container button {
+    display: inline-flex;
+    width: 2rem;
+    height: 2rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.35rem;
+    color: var(--color-white);
+    transition: background-color 180ms ease, opacity 180ms ease;
+}
+
+.new-message-toolbar button:disabled {
+    cursor: default;
+    opacity: 0.42;
+}
+
+.new-message-container button:hover:not(:disabled),
+.new-message-container button:focus-visible {
+    background-color: var(--black-bgc);
+    outline: none;
+}
 
 .new-message-form {
     display: flex;
-    justify-content: center;
-    padding: 10px;
-}
-
-/* Input de mensajes */
-.new-message-container {
-    display: flex;
-    margin: auto;
-    width: 99%;
-    padding: 15px;
-    border-top: 1px solid #444;
-    display: flex;
-    flex-direction: column;
-    background-color: #222529;
-    border-radius: 20px;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .new-message-container input {
     flex: 1;
-    padding: 1px;
-    border: none;
-    border-radius: 5px;
-    background-color:  #222529;
-    color: white;
-    margin-right: 10px;
+    min-width: 0;
+    min-height: 2.35rem;
+    padding: 0.55rem 0.65rem;
+    border: 0;
+    border-radius: 0.4rem;
+    outline: none;
+    background-color: var(--black-bgc);
+    color: var(--color-white);
 }
 
 .new-message-container input:focus {
-    outline: none;
+    box-shadow: 0 0 0 0.125rem var(--color-accent);
 }
 
-.new-message-container button {
-    padding: 5px 7px;
-    border: none;
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background 0.3s ease;
+.btn-send-message {
+    flex-shrink: 0;
+    background-color: var(--color-slack-button);
 }
 
-/* ITEM NEW MESSAGE ICONS */
-
-.new-message-item:first-child,
-.new-message-item:last-child {
-    display: flex;
-    align-items: center;
+.btn-send-message:disabled {
+    cursor: default;
+    opacity: 0.45;
 }
 
-.new-message-item:first-child i,
-.new-message-item:last-child i{
-    font-size: 16px;
-}
-
-
-.new-message-item:first-child i{
-    color: #4C4E51;
-}
-
-.new-message-item:last-child button:hover {
-    background-color: #2A2D30;;
-}
-
-
-.separator{
-    font-size: 14px;
-    color: #444;
-}
-
-
-.btn-send-message i{
-    font-size: 18px;
+.new-message-error {
+    color: var(--color-error);
+    font-size: 0.82rem;
 }

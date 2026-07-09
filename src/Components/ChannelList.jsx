@@ -3,56 +3,62 @@ import { ChannelContext } from '../Context/ChannelContext'
 import { Link, useParams } from 'react-router-dom'
 import { Icons } from '../Assets/Icons/Icons'
 import ModalCreateChannel from './ModalCreateChannel'
-import useModal from '../hooks/useModal'
 
 const ChannelList = () => {
-
-    const { channels } = useContext(ChannelContext)
-    const [isModalOpen, setIsModalOpen] = useState(false) //Estado para controlar el modal
-    const {isOpen: isProfileModalOpen,  openModal: openProfileModal, closeModal: closeProfileModal} = useModal()
+    const { channels, loading, error } = useContext(ChannelContext)
+    const [isModalOpen, setIsModalOpen] = useState(false)
     const { workspace_id, channel_id } = useParams()
+    const channelItems = Array.isArray(channels) ? channels.filter((channel) => channel?._id) : []
 
     return (
-        <>
-            <div className='sidebar-list-title'>
-                <button className='btn-config'>
-                    <i>
-                        <Icons.ArrowDown/>
-                    </i>
+        <section className="sidebar-list-section" aria-labelledby="workspace-channels-title">
+            <div className="sidebar-list-title">
+                <button type="button" className="btn-config" aria-label="Alternar canales" disabled>
+                    <i><Icons.ArrowDown/></i>
                 </button>
-                <span>Canales</span>
+                <span id="workspace-channels-title">Canales</span>
             </div>
+
+            {loading && <p className="sidebar-list-state">Cargando canales...</p>}
+            {!loading && error && <p className="sidebar-list-state sidebar-list-state--error">{error}</p>}
+            {!loading && !error && channelItems.length === 0 && (
+                <p className="sidebar-list-state">No hay canales disponibles.</p>
+            )}
+
+            {!loading && !error && channelItems.length > 0 && (
                 <ul className="channel-list">
-                    {Array.isArray(channels) && channels.length > 0 ? (
-                        channels.map((channel) => (
-                            <li key={channel._id} className='channel-item'>
-                                <Link to={`/workspace/${workspace_id}/channel/${channel._id}`}>
-                                    <div className='channel-item-name'>
-                                        <i>
-                                            <Icons.Hashtag/>
-                                        </i>
-                                        <span>
-                                            {channel.name}
-                                        </span>
-                                    </div>
+                    {channelItems.map((channel) => {
+                        const isActive = channel._id === channel_id
+                        const channelName = channel.name?.trim() || 'Canal sin nombre'
+
+                        return (
+                            <li key={channel._id} className="channel-item">
+                                <Link
+                                    to={`/workspace/${workspace_id}/channel/${channel._id}`}
+                                    className={`sidebar-list-link ${isActive ? 'sidebar-list-link--active' : ''}`}
+                                    aria-current={isActive ? 'page' : undefined}
+                                    title={channelName}
+                                >
+                                    <span className="channel-item-name">
+                                        <i><Icons.Hashtag/></i>
+                                        <span>{channelName}</span>
+                                    </span>
                                 </Link>
                             </li>
-                        ))
-                    ) : (
-                        <p>No hay canales disponibles.</p>
-                    )}
-                    <div className='create-channel container-btn-list'>
-                        <button className='btn-config btn-list-sidebar text' onClick={() => setIsModalOpen(true)}>
-                            <i><Icons.Plus/></i>
-                            <span>
-                                Agregar canales
-                            </span>
-                        </button>
-                    </div>
+                        )
+                    })}
                 </ul>
-        {/* Modal para crear canal */}
-        <ModalCreateChannel isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-        </>
+            )}
+
+            <div className="container-btn-list">
+                <button type="button" className="btn-config btn-list-sidebar text" onClick={() => setIsModalOpen(true)}>
+                    <i><Icons.Plus/></i>
+                    <span>Agregar canales</span>
+                </button>
+            </div>
+
+            <ModalCreateChannel isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+        </section>
     )
 }
 

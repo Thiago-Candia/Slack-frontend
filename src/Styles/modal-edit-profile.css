@@ -77,3 +77,18 @@
 .modal-edit-profile-buttons .btn-save{
     background-color: #11614A;
 }
+
+.modal-edit-profile-item-avatar {
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.visually-hidden-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+}

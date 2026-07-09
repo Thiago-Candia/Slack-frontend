@@ -21,7 +21,7 @@ const WorkspaceContextProvider = ({ children }) => {
             await getWorkspaces()
         } 
         catch (error) {
-            console.log("Error loading workspaces:", error)
+            setError(error.message || "Error al cargar workspaces")
         } 
         finally {
             setLoading(false)

@@ -1,6 +1,6 @@
 import React from "react"
 import WorkspaceChat from "../Components/WorkspaceChat.jsx"
-import WorksapceChatHeader from "../Components/WorksapceChatHeader.jsx"
+import WorkspaceChatHeader from "../Components/WorkspaceChatHeader.jsx"
 import "../Styles/styles.css"
 
 const WorkspaceScreen = () => {
@@ -8,7 +8,7 @@ const WorkspaceScreen = () => {
     return (
         <section className="workspace-container">
             <div className="workspace-header">
-                <WorksapceChatHeader/>
+                <WorkspaceChatHeader/>
             </div>
             <div className="workspace-chat">
                 <WorkspaceChat/>

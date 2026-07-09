@@ -19,8 +19,6 @@
     }
 }
 
-/* Modal */
-
 .modal-container__invite-user{
     display: flex;
     position: fixed;
@@ -34,8 +32,6 @@
     opacity: 1;
     visibility: visible;
 }
-
-/* Modal container */
 
 .modal__invite-user{
     display: flex;
@@ -57,8 +53,6 @@
     margin-bottom: 1rem;
     animation: slideInFromLeft 0.7s ease-out forwards;
 }
-
-/* Modal close */
 
 .btn-modal-close:hover{
     background-color: #ffffff5e;
@@ -90,4 +84,20 @@
 
 .btn-modal-invite-user:hover{
     background-color: #ffffff5e;
+}
+
+.invite-link {
+    display: grid;
+    gap: 8px;
+    max-width: 90%;
+    margin-top: 16px;
+    text-align: center;
+}
+
+.btn-copy-link {
+    overflow: hidden;
+    padding: 8px;
+    border-radius: 6px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

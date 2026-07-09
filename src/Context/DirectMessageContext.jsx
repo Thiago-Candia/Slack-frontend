@@ -9,12 +9,10 @@ import { WorkspaceContext } from "./WorkspaceContext";
 export const DirectMessageContext = createContext();
 
 const DirectMessageProvider = ({ children }) => {
-
     const { user_id } = useParams()
     const { user } = useContext(ProfileContext)
     const { workspaces } = useContext(WorkspaceContext)
     const [messages, setMessages] = useState([])
-
     const { responseApiState, execute: getDirectMessages } = useApiRequest(directMessageService.getByUser)
 
     const receiver = workspaces
@@ -23,12 +21,15 @@ const DirectMessageProvider = ({ children }) => {
 
     const normalizeSender = (sender) => {
         const senderId = sender?._id || sender
+
         if (senderId === user?._id) {
             return user
         }
+
         if (senderId === receiver?._id) {
             return receiver
         }
+
         return sender && typeof sender === "object" ? sender : { _id: senderId, username: "Usuario" }
     }
 
@@ -38,10 +39,15 @@ const DirectMessageProvider = ({ children }) => {
     })
 
     useEffect(() => {
-        if (!user_id) return
         const fetchMessages = async () => {
+            if (!user_id) {
+                setMessages([])
+                return
+            }
+
             await getDirectMessages(user_id)
         }
+
         fetchMessages()
     }, [user_id, getDirectMessages])
 
@@ -58,7 +64,9 @@ const DirectMessageProvider = ({ children }) => {
     const contextValue = {
         messages,
         setMessages,
-        addMessage
+        addMessage,
+        loading: responseApiState.loading,
+        error: responseApiState.error?.message || null
     }
 
     return (

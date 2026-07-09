@@ -1,136 +1,145 @@
 .workspace-header-chat-container {
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 4.5rem 17.5rem minmax(0, 1fr);
     width: 100%;
-    background: #360D3A;
-    padding: 6px 12px;
-    height: 52px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-}
-
-
-.workspace-header-chat-container,
-.new-message-container {
-    zoom: 100%;
-    /* Fuerza el tamaño sin cambiar con el zoom del navegador */
-}
-
-.workspace-header-chat-space {
-    width: 70px;
-    flex-shrink: 0;
+    min-width: 0;
+    background-color: var(--color-slack-button-hover);
 }
 
 .workspace-header-chat-content {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-column: 2 / 4;
+    grid-template-columns: auto minmax(12rem, 34rem) auto;
     align-items: center;
-    width: calc(100% - 70px);
-    height: 100%;
-    gap: 16px;
-    padding: 0 12px;
+    min-width: 0;
+    gap: 1rem;
+    padding: 0 0.75rem;
 }
 
-    /* Botones de navegación */
 .nav-buttons {
     display: flex;
-    gap: 8px;
     align-items: center;
-    height: 100%;
-    flex-shrink: 0;
+    gap: 0.35rem;
 }
 
-.nav-button {
-    display: flex;
+.nav-button,
+.help-button {
+    display: inline-flex;
+    width: 2rem;
+    height: 2rem;
     align-items: center;
     justify-content: center;
-    transition: 0.3s;
-    flex-shrink: 0;
-    background: transparent;
-    border: none;
-    color: white;
-    cursor: pointer;
-    font-size: 18px;
-    padding: 4px;
-    width: 32px;
-    height: 32px;
+    border-radius: 0.375rem;
+    color: var(--color-white);
+    transition: background-color 180ms ease, opacity 180ms ease;
 }
 
-.nav-button:hover {
-    opacity: 0.8;
+.nav-button:hover:not(:disabled),
+.nav-button:focus-visible,
+.help-button:hover:not(:disabled),
+.help-button:focus-visible {
+    background-color: rgb(255 255 255 / 10%);
+    outline: none;
 }
 
-/* Barra de búsqueda */
+.nav-button:disabled,
+.help-button:disabled,
+.pro-button:disabled {
+    cursor: default;
+    opacity: 0.65;
+}
+
 .search-bar {
     display: flex;
+    width: min(100%, 34rem);
+    height: 2rem;
     align-items: center;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 6px 12px;
-    border-radius: 6px;
-    height: 36px;
-    width: 380px;
-    flex-shrink: 0;
+    justify-self: center;
+    gap: 0.5rem;
+    padding: 0 0.75rem;
+    border-radius: 0.375rem;
+    background-color: rgb(255 255 255 / 10%);
+    color: var(--color-white);
+}
+
+.workspace-header-search-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
 }
 
 .search-bar input {
-    background: transparent;
-    border: none;
-    color: white;
+    width: 100%;
+    min-width: 0;
+    border: 0;
     outline: none;
-    font-size: 14px;
-    flex: 1;
+    background: transparent;
+    color: var(--color-white);
+    font-size: 0.85rem;
+}
+
+.search-bar input::placeholder {
+    color: var(--color-soft-panel);
 }
 
 .search-icon {
-    color: white;
-    margin-left: 6px;
     flex-shrink: 0;
-    width: 18px;
-    height: 18px;
+    color: var(--color-soft-panel);
+    font-size: 1rem;
 }
 
-/* Botón de versión de prueba */
 .pro-version {
     display: flex;
     align-items: center;
-    gap: 8px;
-    flex-shrink: 0;
-    height: 100%;
+    justify-content: flex-end;
+    min-width: 0;
+    gap: 0.5rem;
 }
 
 .pro-button {
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
-    color: white;
-    padding: 6px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    height: 36px;
-    display: flex;
+    display: inline-flex;
+    min-width: 0;
+    height: 2rem;
     align-items: center;
-    gap: 6px;
-    white-space: nowrap;
-    flex-shrink: 0;
+    gap: 0.45rem;
+    padding: 0 0.75rem;
+    border-radius: 0.375rem;
+    background-color: rgb(255 255 255 / 10%);
+    color: var(--color-white);
+    font-size: 0.82rem;
 }
 
 .pro-button span {
-    margin-left: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
-.help-button {
-    background: transparent;
-    border: none;
-    color: white;
-    cursor: pointer;
-    font-size: 18px;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
+@media (max-width: 64rem) {
+    .workspace-header-chat-container {
+        grid-template-columns: 4rem minmax(14rem, 16rem) minmax(0, 1fr);
+    }
+
+    .workspace-header-chat-content {
+        grid-template-columns: auto minmax(10rem, 1fr) auto;
+    }
+
+    .pro-button span {
+        display: none;
+    }
+}
+
+@media (max-width: 48rem) {
+    .workspace-header-chat-container {
+        grid-template-columns: 3.75rem minmax(0, 1fr);
+    }
+
+    .workspace-header-chat-content {
+        grid-column: 1 / -1;
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        gap: 0.5rem;
+    }
 }

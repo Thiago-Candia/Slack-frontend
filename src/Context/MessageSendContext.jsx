@@ -7,26 +7,28 @@ import { directMessageService } from "../services/directMessage.service";
 export const MessageSendContext = createContext();
 
 export const MessageSendContextProvider = ({ children }) => {
-
     const { channel_id, user_id } = useParams()
     const [isSending, setIsSending] = useState(false)
     const [error, setError] = useState(null)
     const { execute: sendMessageRequest } = useApiRequest(channelService.sendMessage, { throwOnError: true })
     const { execute: sendDirectMessageRequest } = useApiRequest(directMessageService.send, { throwOnError: true })
 
-    const sendMessage = async (new_message) => {
+    const sendMessage = async (newMessage) => {
         setIsSending(true)
         setError(null)
+
         try {
             if (user_id) {
-                const response = await sendDirectMessageRequest(user_id, new_message)
-                return response?.payload?.new_message || response?.message || null
+                const response = await sendDirectMessageRequest(user_id, newMessage)
+                return response?.payload?.new_message || null
             }
+
             if(!channel_id) {
-                setError("No hay una conversacion seleccionada.")
+                setError("No hay una conversación seleccionada.")
                 return null
             }
-            const response = await sendMessageRequest(channel_id, new_message)
+
+            const response = await sendMessageRequest(channel_id, newMessage)
             return response?.payload?.new_message || null
         } 
         catch (error) {

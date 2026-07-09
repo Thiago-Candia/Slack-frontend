@@ -5,46 +5,60 @@ import { channelService } from "../services/channel.service"
 
 export const ChannelContext = createContext()
 
-const ChannelContextProvider = ({ children }) => {
+const getStoredChannels = (workspaceId) => {
+    if (!workspaceId) {
+        return []
+    }
 
-    const { workspace_id } = useParams()
-
-    const [channels, setChannels] = useState(() => {
-        const savedChannels = localStorage.getItem(`channels_${workspace_id}`);
+    try {
+        const savedChannels = localStorage.getItem(`channels_${workspaceId}`)
         return savedChannels ? JSON.parse(savedChannels) : []
-    })
+    }
+    catch {
+        return []
+    }
+}
 
-    const [loading, setLoading] = useState(true)
+const ChannelContextProvider = ({ children }) => {
+    const { workspace_id } = useParams()
+    const [channels, setChannels] = useState(() => getStoredChannels(workspace_id))
+    const [loading, setLoading] = useState(Boolean(workspace_id))
     const { responseApiState, execute: getChannels } = useApiRequest(channelService.getByWorkspace)
 
     useEffect(() => {
         const fetchWorkspaceChannels = async () => {
+            if (!workspace_id) {
+                setChannels([])
+                setLoading(false)
+                return
+            }
+
             setLoading(true)
             await getChannels(workspace_id)
             setLoading(false)
         }
-        fetchWorkspaceChannels()
-    }, [workspace_id, getChannels]) 
 
+        fetchWorkspaceChannels()
+    }, [workspace_id, getChannels])
 
     useEffect(() => {
-        if (responseApiState.data && responseApiState.data.payload) {
-            const savedChannels = responseApiState.data.payload.channels;
-            setChannels(savedChannels)
-            localStorage.setItem(`channels_${workspace_id}`, JSON.stringify(savedChannels))
+        if (responseApiState.data?.payload?.channels) {
+            const nextChannels = responseApiState.data.payload.channels
+            setChannels(nextChannels)
+            localStorage.setItem(`channels_${workspace_id}`, JSON.stringify(nextChannels))
         }
     }, [responseApiState.data, workspace_id])
 
     return (
-        <ChannelContext.Provider value={{ channels, setChannels, loading}}>
+        <ChannelContext.Provider value={{
+            channels,
+            setChannels,
+            loading,
+            error: responseApiState.error?.message || null
+        }}>
             {children}
         </ChannelContext.Provider>
     )
 }
 
-
 export default ChannelContextProvider
-
-
-
-
