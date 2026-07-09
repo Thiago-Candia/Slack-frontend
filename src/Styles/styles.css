@@ -6,6 +6,7 @@
 /* Authentication and workspace creation */
 @import url('login-screen.css');
 @import url('register-screen.css');
+@import url('reset-password.css');
 @import url('rewrite-password.css');
 @import url('create-workspace.css');
 
