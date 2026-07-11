@@ -21,14 +21,17 @@ const LoginScreen = () => {
   const { responseApiState, execute: loginRequest } = useApiRequest(authService.login)
 
   useEffect(() => {
-    if (responseApiState.data?.payload?.authorization_token) {
-      login(responseApiState.data.payload.authorization_token)
+    const authorizationToken = responseApiState.data?.payload?.authorization_token
 
-      loadWorkspaces().then(() => {
-        navigate('/home')
-      })
+    if(!authorizationToken){
+      return
     }
-  }, [responseApiState]) 
+    login(authorizationToken)
+    loadWorkspaces().then(()=> {
+      navigate('/home')
+    })
+
+  }, [responseApiState.data, login, loadWorkspaces, navigate]) 
 
   const handleSubmitForm = async (e) => {
     e.preventDefault()

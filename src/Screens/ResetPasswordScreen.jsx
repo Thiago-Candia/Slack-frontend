@@ -99,10 +99,10 @@ const ResetPasswordScreen = () => {
                     </button>
 
                     <div className="reset-password-links">
-                        <Link to="/login">Volver a iniciar sesi&oacute;n</Link>
+                        <Link to="/login">Volver a iniciar sesión</Link>
                         <span>
-                            &iquest;A&uacute;n no tienes cuenta?
-                            <Link to="/register">Reg&iacute;strate</Link>
+                            Aun no tienes cuenta?
+                            <Link to="/register">Registrate</Link>
                         </span>
                     </div>
                 </form>
