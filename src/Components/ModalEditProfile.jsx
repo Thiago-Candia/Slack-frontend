@@ -63,10 +63,10 @@ const ModalEditProfile = ({ isOpen, onClose }) => {
             }
 
             onClose()
-        } 
+        }
         catch (error) {
             setError(error.message || 'Error al actualizar el perfil')
-        } 
+        }
         finally {
             setIsLoading(false)
         }
@@ -92,32 +92,35 @@ const ModalEditProfile = ({ isOpen, onClose }) => {
     }
 
     return (
-        <div className="modal-edit-profile" role="dialog" aria-modal="true" aria-labelledby="edit-profile-title">
-            <div className="modal-edit-profile-container">
-                <h2 className="text" id="edit-profile-title">Editar perfil</h2>
-                <div className="modal-edit-profile-item">
-                    <label className="text" htmlFor="edit-profile-username">Nombre de usuario</label>
+        <div className="edit-profile-modal" role="dialog" aria-modal="true" aria-labelledby="edit-profile-title">
+            <div className="edit-profile-modal__dialog">
+                <h2 className="edit-profile-modal__title" id="edit-profile-title">Editar perfil</h2>
+
+                <div className="edit-profile-modal__field">
+                    <label className="edit-profile-modal__label" htmlFor="edit-profile-username">Nombre de usuario</label>
                     <input
                         id="edit-profile-username"
+                        className="edit-profile-modal__input"
                         type="text"
                         name="username"
                         value={formState.username}
                         onChange={handleChangeInput}
                     />
                 </div>
-                <div className="modal-edit-profile-item">
+
+                <div className="edit-profile-modal__avatar-field">
                     <button
                         type="button"
-                        className="modal-edit-profile-item-avatar"
+                        className="edit-profile-modal__avatar-button"
                         onClick={() => fileInputRef.current.click()}
                         aria-label="Cambiar avatar"
                     >
-                        <img 
-                            src={avatarPreview || DEFAULT_AVATAR_URL} 
+                        <img
+                            src={avatarPreview || DEFAULT_AVATAR_URL}
                             alt="Avatar"
                         />
                     </button>
-                    <label className="text modal-edit-profile-item-label" htmlFor="edit-profile-avatar">Subir avatar</label>
+                    <label className="edit-profile-modal__label" htmlFor="edit-profile-avatar">Subir avatar</label>
                     <input
                         id="edit-profile-avatar"
                         type="file"
@@ -128,13 +131,15 @@ const ModalEditProfile = ({ isOpen, onClose }) => {
                         accept="image/*"
                     />
                 </div>
-                {error && <p className="error-message">{error}</p>}
-                <div className="modal-edit-profile-buttons">
-                    <button type="button" onClick={onClose} className="btn-config btn-cancel">
-                        <span className="text">Cancelar</span>
+
+                {error && <p className="edit-profile-modal__error">{error}</p>}
+
+                <div className="edit-profile-modal__actions">
+                    <button type="button" onClick={onClose} className="edit-profile-modal__cancel-button">
+                        Cancelar
                     </button>
-                    <button type="button" onClick={handleSave} className="btn-config btn-save" disabled={isLoading}>
-                        <span className="text">{isLoading ? 'Guardando...' : 'Guardar cambios'}</span>
+                    <button type="button" onClick={handleSave} className="edit-profile-modal__save-button" disabled={isLoading}>
+                        {isLoading ? 'Guardando...' : 'Guardar cambios'}
                     </button>
                 </div>
             </div>

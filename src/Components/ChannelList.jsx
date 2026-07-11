@@ -11,38 +11,36 @@ const ChannelList = () => {
     const channelItems = Array.isArray(channels) ? channels.filter((channel) => channel?._id) : []
 
     return (
-        <section className="sidebar-list-section" aria-labelledby="workspace-channels-title">
-            <div className="sidebar-list-title">
-                <button type="button" className="btn-config" aria-label="Alternar canales" disabled>
+        <section className="workspace-list" aria-labelledby="workspace-channels-title">
+            <div className="workspace-list__header">
+                <button type="button" className="workspace-list__toggle" aria-label="Alternar canales" disabled>
                     <i><Icons.ArrowDown/></i>
                 </button>
-                <span id="workspace-channels-title">Canales</span>
+                <span id="workspace-channels-title" className="workspace-list__title">Canales</span>
             </div>
 
-            {loading && <p className="sidebar-list-state">Cargando canales...</p>}
-            {!loading && error && <p className="sidebar-list-state sidebar-list-state--error">{error}</p>}
+            {loading && <p className="workspace-list__state">Cargando canales...</p>}
+            {!loading && error && <p className="workspace-list__state workspace-list__state--error">{error}</p>}
             {!loading && !error && channelItems.length === 0 && (
-                <p className="sidebar-list-state">No hay canales disponibles.</p>
+                <p className="workspace-list__state">No hay canales disponibles.</p>
             )}
 
             {!loading && !error && channelItems.length > 0 && (
-                <ul className="channel-list">
+                <ul className="workspace-list__items">
                     {channelItems.map((channel) => {
                         const isActive = channel._id === channel_id
                         const channelName = channel.name?.trim() || 'Canal sin nombre'
 
                         return (
-                            <li key={channel._id} className="channel-item">
+                            <li key={channel._id} className="workspace-list__item">
                                 <Link
                                     to={`/workspace/${workspace_id}/channel/${channel._id}`}
-                                    className={`sidebar-list-link ${isActive ? 'sidebar-list-link--active' : ''}`}
+                                    className={`workspace-list__link ${isActive ? 'workspace-list__link--active' : ''}`}
                                     aria-current={isActive ? 'page' : undefined}
                                     title={channelName}
                                 >
-                                    <span className="channel-item-name">
-                                        <i><Icons.Hashtag/></i>
-                                        <span>{channelName}</span>
-                                    </span>
+                                    <span className="workspace-list__link-icon"><Icons.Hashtag/></span>
+                                    <span className="workspace-list__link-text">{channelName}</span>
                                 </Link>
                             </li>
                         )
@@ -50,8 +48,8 @@ const ChannelList = () => {
                 </ul>
             )}
 
-            <div className="container-btn-list">
-                <button type="button" className="btn-config btn-list-sidebar text" onClick={() => setIsModalOpen(true)}>
+            <div className="workspace-list__actions">
+                <button type="button" className="workspace-list__action-button" onClick={() => setIsModalOpen(true)}>
                     <i><Icons.Plus/></i>
                     <span>Agregar canales</span>
                 </button>

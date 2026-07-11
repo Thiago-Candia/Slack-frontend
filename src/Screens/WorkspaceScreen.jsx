@@ -4,13 +4,12 @@ import WorkspaceChatHeader from "../Components/WorkspaceChatHeader.jsx"
 import "../Styles/styles.css"
 
 const WorkspaceScreen = () => {
-
     return (
-        <section className="workspace-container">
-            <div className="workspace-header">
+        <section className="workspace-layout">
+            <div className="workspace-layout__topbar">
                 <WorkspaceChatHeader/>
             </div>
-            <div className="workspace-chat">
+            <div className="workspace-layout__body">
                 <WorkspaceChat/>
             </div>
         </section>

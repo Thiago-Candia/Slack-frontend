@@ -1,19 +1,19 @@
-.messages-body {
+.message-list {
     min-height: 0;
     overflow-x: hidden;
     overflow-y: auto;
     background-color: var(--black-bgc);
 }
 
-.messages-list-box {
+.message-list__items {
     display: grid;
     gap: 0.2rem;
-    padding: 1rem 0.75rem 1.25rem;
     max-width: 100%;
+    padding: 1rem 0.75rem 1.25rem;
     word-break: break-word;
 }
 
-.messages-state {
+.message-list__state {
     display: grid;
     place-content: center;
     gap: 0.45rem;
@@ -23,23 +23,16 @@
     text-align: center;
 }
 
-.messages-state h2 {
+.message-list__state h2 {
     color: var(--color-white);
     font-size: 1.1rem;
 }
 
-.messages-state--error {
+.message-list__state--error {
     color: var(--color-error);
 }
 
-.chat-container {
-    min-width: 0;
-    min-height: 0;
-    background-color: var(--black-bgc);
-    color: var(--color-white);
-}
-
-.message-item {
+.message {
     display: flex;
     width: 100%;
     max-width: 100%;
@@ -47,42 +40,39 @@
     padding: 0.18rem 0.5rem;
 }
 
-.message-item:hover {
+.message:hover {
     background-color: rgb(255 255 255 / 4%);
 }
 
-.message-sub_item {
-    display: flex;
-    min-width: 0;
-    flex-direction: column;
-}
-
-.message-sub_item:last-child {
-    flex: 1;
-}
-
-.message-avatar-container,
-.message-avatar-empty {
+.message__avatar-slot,
+.message__avatar-placeholder {
     flex-shrink: 0;
     width: 2rem;
     height: 2rem;
 }
 
-.message-avatar {
+.message__avatar {
     width: 100%;
     height: 100%;
     border-radius: 0.35rem;
     object-fit: cover;
 }
 
-.message-sender {
+.message__body {
+    display: flex;
+    min-width: 0;
+    flex: 1;
+    flex-direction: column;
+}
+
+.message__sender {
     color: var(--color-white);
     font-size: 0.88rem;
     font-weight: 700;
     line-height: 1.25;
 }
 
-.message-content p {
+.message__content p {
     max-width: 100%;
     overflow-wrap: break-word;
     color: var(--color-white);

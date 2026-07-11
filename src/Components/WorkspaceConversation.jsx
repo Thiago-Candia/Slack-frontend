@@ -9,9 +9,9 @@ import NewMessage from "./NewMessage"
 const ConversationLayout = ({ title, subtitle, children }) => {
     return (
         <section className="workspace-conversation" aria-label={title}>
-            <header className="conversation-header">
-                <h1>{title}</h1>
-                {subtitle && <p>{subtitle}</p>}
+            <header className="workspace-conversation__header">
+                <h1 className="workspace-conversation__title">{title}</h1>
+                {subtitle && <p className="workspace-conversation__subtitle">{subtitle}</p>}
             </header>
             {children}
         </section>
@@ -19,16 +19,16 @@ const ConversationLayout = ({ title, subtitle, children }) => {
 }
 
 const WorkspaceEmptyState = ({ workspaceName, loading, error }) => {
-    const title = loading ? "Cargando workspace..." : "Selecciona una conversación"
+    const title = loading ? "Cargando workspace..." : "Selecciona una conversacion"
     const description = error
-        ? "No pudimos cargar este workspace. Revisa tu conexión o vuelve a intentarlo."
+        ? "No pudimos cargar este workspace. Revisa tu conexion o vuelve a intentarlo."
         : `Elige un canal o un mensaje directo${workspaceName ? ` en ${workspaceName}` : ""} para empezar.`
 
     return (
         <section className="workspace-conversation workspace-conversation--empty" aria-label={title}>
-            <div className="conversation-empty-state">
-                <h1>{title}</h1>
-                <p>{description}</p>
+            <div className="workspace-conversation__empty-state">
+                <h1 className="workspace-conversation__empty-title">{title}</h1>
+                <p className="workspace-conversation__empty-description">{description}</p>
             </div>
         </section>
     )
@@ -46,7 +46,7 @@ const WorkspaceConversation = ({ workspace, loading, error }) => {
             <DirectMessageProvider>
                 <ConversationLayout
                     title={activeMember?.username || "Mensaje directo"}
-                    subtitle={activeMember?.email || "Conversación privada"}
+                    subtitle={activeMember?.email || "Conversacion privada"}
                 >
                     <MessageList/>
                     <NewMessage/>

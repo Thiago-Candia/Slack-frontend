@@ -27,34 +27,34 @@ const MessageList = () => {
 
     if (loading) {
         return (
-            <div className="messages-body">
-                <div className="messages-state">Cargando mensajes...</div>
+            <div className="message-list">
+                <div className="message-list__state">Cargando mensajes...</div>
             </div>
         )
     }
 
     if (error) {
         return (
-            <div className="messages-body">
-                <div className="messages-state messages-state--error">{error}</div>
+            <div className="message-list">
+                <div className="message-list__state message-list__state--error">{error}</div>
             </div>
         )
     }
 
     if (!Array.isArray(messages) || messages.length === 0) {
         return (
-            <div className="messages-body">
-                <div className="messages-state">
-                    <h2>No hay mensajes todavía</h2>
-                    <p>Envía el primer mensaje para iniciar la conversación.</p>
+            <div className="message-list">
+                <div className="message-list__state">
+                    <h2>No hay mensajes todavia</h2>
+                    <p>Envia el primer mensaje para iniciar la conversacion.</p>
                 </div>
             </div>
         )
     }
 
     return (
-        <div className="messages-body">
-            <div className="messages-list-box">
+        <div className="message-list">
+            <div className="message-list__items">
                 {messages.map((message, index) => {
                     const sender = getSender(message)
                     const previousSender = getSender(messages[index - 1])
@@ -63,21 +63,21 @@ const MessageList = () => {
                     const avatar = sender?.profile_avatar_base64 || DEFAULT_AVATAR_URL
 
                     return (
-                        <article className="message-item" key={message._id || `${sender?._id || "message"}-${index}`}>
-                            <div className="message-sub_item message-avatar-container">
+                        <article className="message" key={message._id || `${sender?._id || "message"}-${index}`}>
+                            <div className="message__avatar-slot">
                                 {!isSameSenderAsPrevious ? (
-                                    <img className="message-avatar" src={avatar} alt={senderName} />
+                                    <img className="message__avatar" src={avatar} alt={senderName} />
                                 ) : (
-                                    <div className="message-avatar-empty" />
+                                    <div className="message__avatar-placeholder" />
                                 )}
                             </div>
-                            <div className="message-sub_item">
+                            <div className="message__body">
                                 {!isSameSenderAsPrevious && (
-                                    <div className="message-sender">
+                                    <div className="message__sender">
                                         <span>{senderName}</span>
                                     </div>
                                 )}
-                                <div className="message-content">
+                                <div className="message__content">
                                     <p>{message.content}</p>
                                 </div>
                             </div>

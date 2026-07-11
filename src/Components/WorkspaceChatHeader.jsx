@@ -16,30 +16,30 @@ const WorkspaceChatHeader = () => {
     const searchPlaceholder = user_id ? "Buscar en mensajes directos" : `Buscar en ${searchTarget}`
 
     return (
-        <header className="workspace-header-chat-container">
-            <div className="workspace-header-chat-content">
-                <div className="workspace-header-chat-content-item nav-buttons">
-                    <button type="button" onClick={() => navigate(-1)} className="nav-button" aria-label="Volver">
+        <header className="workspace-topbar">
+            <div className="workspace-topbar__content">
+                <div className="workspace-topbar__navigation">
+                    <button type="button" onClick={() => navigate(-1)} className="workspace-topbar__icon-button" aria-label="Volver">
                         <Icons.ArrowBack />
                     </button>
-                    <button type="button" onClick={() => navigate(1)} className="nav-button" aria-label="Avanzar">
+                    <button type="button" onClick={() => navigate(1)} className="workspace-topbar__icon-button" aria-label="Avanzar">
                         <Icons.ArrowForward />
                     </button>
-                    <button type="button" className="nav-button" aria-label="Historial" disabled>
+                    <button type="button" className="workspace-topbar__icon-button" aria-label="Historial" disabled>
                         <Icons.History />
                     </button>
                 </div>
-                <label className="workspace-header-chat-content-item search-bar">
-                    <span className="workspace-header-search-label">Buscar</span>
+                <label className="workspace-topbar__search">
+                    <span className="workspace-topbar__search-label">Buscar</span>
                     <input type="text" placeholder={searchPlaceholder} disabled />
-                    <Icons.Search className="search-icon" />
+                    <Icons.Search className="workspace-topbar__search-icon" />
                 </label>
-                <div className="workspace-header-chat-content-item pro-version">
-                    <button type="button" className="pro-button" disabled>
+                <div className="workspace-topbar__actions">
+                    <button type="button" className="workspace-topbar__trial-button" disabled>
                         <Icons.Slack />
-                        <span>Versión de prueba de Pro de Slack</span>
+                        <span>Version de prueba de Pro de Slack</span>
                     </button>
-                    <button type="button" className="help-button" aria-label="Ayuda" disabled>
+                    <button type="button" className="workspace-topbar__icon-button" aria-label="Ayuda" disabled>
                         <Icons.Help />
                     </button>
                 </div>

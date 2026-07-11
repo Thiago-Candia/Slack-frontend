@@ -28,56 +28,55 @@ const WorkspacePrimarySidebar = () => {
         openProfileModal()
     }
 
+    const navigationItems = [
+        { label: "Inicio", Icon: Icons.Home, onClick: () => navigate("/home") },
+        { label: "Mensajes directos", Icon: Icons.Messages, disabled: true },
+        { label: "Actividad", Icon: Icons.Notification, disabled: true },
+        { label: "Mas", Icon: Icons.MoreOptions, disabled: true }
+    ]
+
     return (
-        <aside className="sidebar-desktop" aria-label="Navegación principal del workspace">
-            <div className="sidebar-desktop-item">
-                <button type="button" className="button-item-sidebar-desktop btn-config" aria-label="Slack">
+        <aside className="workspace-primary-sidebar" aria-label="Navegacion principal del workspace">
+            <div className="workspace-primary-sidebar__nav">
+                <button type="button" className="workspace-primary-sidebar__logo-button" aria-label="Slack">
                     <Icons.Slack/>
                 </button>
 
-                <div className="container-btn-sidebar-desktop">
-                    <button type="button" onClick={() => navigate("/home")} className="btn-sidebar-desktop btn-config" aria-label="Inicio">
-                        <i><Icons.Home/></i>
-                    </button>
-                    <span>Inicio</span>
-                </div>
-
-                <div className="container-btn-sidebar-desktop">
-                    <button type="button" className="btn-sidebar-desktop btn-config" aria-label="Mensajes directos" disabled>
-                        <i><Icons.Messages/></i>
-                    </button>
-                    <span className="sidebar-text">Mensajes directos</span>
-                </div>
-
-                <div className="container-btn-sidebar-desktop">
-                    <button type="button" className="btn-sidebar-desktop btn-config" aria-label="Actividad" disabled>
-                        <i><Icons.Notification/></i>
-                    </button>
-                    <span>Actividad</span>
-                </div>
-
-                <div className="container-btn-sidebar-desktop">
-                    <button type="button" className="btn-sidebar-desktop btn-config" aria-label="Más opciones" disabled>
-                        <i><Icons.MoreOptions/></i>
-                    </button>
-                    <span>Más</span>
-                </div>
+                {navigationItems.map(({ label, Icon, onClick, disabled }) => (
+                    <div key={label} className="workspace-primary-sidebar__nav-item">
+                        <button
+                            type="button"
+                            onClick={onClick}
+                            className="workspace-primary-sidebar__button"
+                            aria-label={label}
+                            disabled={disabled}
+                        >
+                            <i><Icon/></i>
+                        </button>
+                        <span className="workspace-primary-sidebar__label">{label}</span>
+                    </div>
+                ))}
             </div>
 
-            <div className="workspace-profile-anchor">
-                <button type="button" className="btn-sidebar-desktop btn-config button-plus-sidebar-desktop" aria-label="Crear" disabled>
+            <div className="workspace-primary-sidebar__profile">
+                <button
+                    type="button"
+                    className="workspace-primary-sidebar__button workspace-primary-sidebar__button--create"
+                    aria-label="Crear"
+                    disabled
+                >
                     <i><Icons.Plus/></i>
                 </button>
 
                 <button
                     type="button"
-                    className="btn-sidebar-desktop btn-config workspace-profile-trigger"
+                    className="workspace-primary-sidebar__profile-trigger"
                     onClick={() => setIsProfileMenuOpen((prevState) => !prevState)}
                     aria-expanded={isProfileMenuOpen}
-                    aria-label="Abrir menú de perfil"
+                    aria-label="Abrir menu de perfil"
                 >
                     <img
-                        className="workspace-avatar"
+                        className="workspace-primary-sidebar__avatar"
                         src={user?.profile_avatar_base64 || DEFAULT_AVATAR_URL}
                         alt={user?.username || "Usuario"}
                     />

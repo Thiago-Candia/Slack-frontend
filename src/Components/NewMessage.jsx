@@ -11,7 +11,7 @@ const toolbarActions = [
     { label: "Enlace", Icon: Icons.Link },
     { label: "Lista numerada", Icon: Icons.ListNumber },
     { label: "Lista", Icon: Icons.UnorderedList },
-    { label: "Código", Icon: Icons.Code }
+    { label: "Codigo", Icon: Icons.Code }
 ]
 
 const NewMessage = () => {
@@ -43,17 +43,18 @@ const NewMessage = () => {
     }
 
     return (
-        <div className="new-message-container">
-            <div className="new-message-item new-message-toolbar" aria-label="Herramientas de formato">
+        <div className="message-composer">
+            <div className="message-composer__toolbar" aria-label="Herramientas de formato">
                 {toolbarActions.map(({ label, Icon }) => (
-                    <button key={label} type="button" className="btn-config" aria-label={label} disabled>
+                    <button key={label} type="button" className="message-composer__icon-button" aria-label={label} disabled>
                         <i><Icon/></i>
                     </button>
                 ))}
             </div>
-            <form className="new-message-form" onSubmit={handleSendMessage}>
+            <form className="message-composer__form" onSubmit={handleSendMessage}>
                 <input
                     ref={inputRef}
+                    className="message-composer__input"
                     type="text"
                     value={newMessage}
                     onChange={(e) => setNewMessage(e.target.value)}
@@ -63,13 +64,13 @@ const NewMessage = () => {
                 <button
                     type="submit"
                     disabled={isSending || !trimmedMessage}
-                    className="btn-config btn-send-message"
+                    className="message-composer__send-button"
                     aria-label="Enviar mensaje"
                 >
                     <i><Icons.SendMessage/></i>
                 </button>
             </form>
-            {error && <p className="new-message-error">{error}</p>}
+            {error && <p className="message-composer__error">{error}</p>}
         </div>
     )
 }

@@ -46,23 +46,23 @@ const ModalInviteUser = ({ isOpen, onClose }) => {
     }
 
     return (
-        <section className="modal-container__invite-user" role="dialog" aria-modal="true" aria-labelledby="invite-user-title">
-            <div className="modal__invite-user">
-                <h2 className="modal-title__invite-user" id="invite-user-title">Invitar usuario</h2>
-                <div className="modal-actions">
-                    <button className="btn-modal-invite-user" type="button" onClick={handleGenerateInviteLink} disabled={isInviting}>
-                        {isInviting ? "Generando..." : "Generar invitación"}
+        <section className="invite-user-modal" role="dialog" aria-modal="true" aria-labelledby="invite-user-title">
+            <div className="invite-user-modal__dialog">
+                <h2 className="invite-user-modal__title" id="invite-user-title">Invitar usuario</h2>
+                <div className="invite-user-modal__actions">
+                    <button className="invite-user-modal__submit-button" type="button" onClick={handleGenerateInviteLink} disabled={isInviting}>
+                        {isInviting ? "Generando..." : "Generar invitacion"}
                     </button>
-                    <button type="button" onClick={onClose} className="btn-modal-close" aria-label="Cerrar">X</button>
+                    <button type="button" onClick={onClose} className="invite-user-modal__close-button" aria-label="Cerrar">X</button>
                 </div>
-                {error && <p className="modal-error">{error}</p>}
-                {inviteLink && ( 
-                    <div className="invite-link">
-                        <h3>Copiar enlace de invitación</h3>
-                        <button type="button" onClick={handleCopyLink} className="btn-copy-link">
+                {error && <p className="invite-user-modal__error">{error}</p>}
+                {inviteLink && (
+                    <div className="invite-user-modal__link-box">
+                        <h3>Copiar enlace de invitacion</h3>
+                        <button type="button" onClick={handleCopyLink} className="invite-user-modal__copy-button">
                             {inviteLink}
                         </button>
-                        {copyStatus && <p>{copyStatus}</p>}
+                        {copyStatus && <p className="invite-user-modal__copy-status">{copyStatus}</p>}
                     </div>
                 )}
             </div>

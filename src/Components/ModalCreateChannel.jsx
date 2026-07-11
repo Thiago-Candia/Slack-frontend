@@ -50,12 +50,13 @@ const ModalCreateChannel = ({ isOpen, onClose }) => {
     }
 
     return (
-        <section className="modal-container__create-channel" role="dialog" aria-modal="true" aria-labelledby="create-channel-title">
-            <div className="modal__create-channel">
-                <h2 className="modal-title__create-channel" id="create-channel-title">Crear canal</h2>
-                <form onSubmit={handleCreateChannel} className="modal-form__create-channel">
+        <section className="create-channel-modal" role="dialog" aria-modal="true" aria-labelledby="create-channel-title">
+            <div className="create-channel-modal__dialog">
+                <h2 className="create-channel-modal__title" id="create-channel-title">Crear canal</h2>
+                <form onSubmit={handleCreateChannel} className="create-channel-modal__form">
                     <input
                         ref={inputRef}
+                        className="create-channel-modal__input"
                         type="text"
                         value={channelName}
                         onChange={(e) => {
@@ -65,12 +66,12 @@ const ModalCreateChannel = ({ isOpen, onClose }) => {
                         placeholder="Nombre del canal"
                         aria-invalid={Boolean(validationError || error)}
                     />
-                    {(validationError || error) && <p className="modal-error">{validationError || error}</p>}
-                    <div className="modal-actions">
-                        <button type="button" className="btn-modal-close" onClick={onClose} aria-label="Cerrar">
+                    {(validationError || error) && <p className="create-channel-modal__error">{validationError || error}</p>}
+                    <div className="create-channel-modal__actions">
+                        <button type="button" className="create-channel-modal__close-button" onClick={onClose} aria-label="Cerrar">
                             X
                         </button>
-                        <button type="submit" disabled={isCreatingChannel} className="btn-modal-create-channel">
+                        <button type="submit" disabled={isCreatingChannel} className="create-channel-modal__submit-button">
                             {isCreatingChannel ? "Creando..." : "Crear canal"}
                         </button>
                     </div>

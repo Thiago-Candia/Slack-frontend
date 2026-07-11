@@ -1,4 +1,4 @@
-.workspace-header-chat-container {
+.workspace-topbar {
     display: grid;
     grid-template-columns: 4.5rem 17.5rem minmax(0, 1fr);
     width: 100%;
@@ -6,7 +6,7 @@
     background-color: var(--color-slack-button-hover);
 }
 
-.workspace-header-chat-content {
+.workspace-topbar__content {
     display: grid;
     grid-column: 2 / 4;
     grid-template-columns: auto minmax(12rem, 34rem) auto;
@@ -16,14 +16,19 @@
     padding: 0 0.75rem;
 }
 
-.nav-buttons {
+.workspace-topbar__navigation,
+.workspace-topbar__actions {
     display: flex;
     align-items: center;
     gap: 0.35rem;
 }
 
-.nav-button,
-.help-button {
+.workspace-topbar__actions {
+    justify-content: flex-end;
+    min-width: 0;
+}
+
+.workspace-topbar__icon-button {
     display: inline-flex;
     width: 2rem;
     height: 2rem;
@@ -34,22 +39,19 @@
     transition: background-color 180ms ease, opacity 180ms ease;
 }
 
-.nav-button:hover:not(:disabled),
-.nav-button:focus-visible,
-.help-button:hover:not(:disabled),
-.help-button:focus-visible {
+.workspace-topbar__icon-button:hover:not(:disabled),
+.workspace-topbar__icon-button:focus-visible {
     background-color: rgb(255 255 255 / 10%);
     outline: none;
 }
 
-.nav-button:disabled,
-.help-button:disabled,
-.pro-button:disabled {
+.workspace-topbar__icon-button:disabled,
+.workspace-topbar__trial-button:disabled {
     cursor: default;
     opacity: 0.65;
 }
 
-.search-bar {
+.workspace-topbar__search {
     display: flex;
     width: min(100%, 34rem);
     height: 2rem;
@@ -62,16 +64,16 @@
     color: var(--color-white);
 }
 
-.workspace-header-search-label {
+.workspace-topbar__search-label {
     position: absolute;
-    width: 1px;
-    height: 1px;
+    width: 0.0625rem;
+    height: 0.0625rem;
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
 }
 
-.search-bar input {
+.workspace-topbar__search input {
     width: 100%;
     min-width: 0;
     border: 0;
@@ -81,25 +83,17 @@
     font-size: 0.85rem;
 }
 
-.search-bar input::placeholder {
+.workspace-topbar__search input::placeholder {
     color: var(--color-soft-panel);
 }
 
-.search-icon {
+.workspace-topbar__search-icon {
     flex-shrink: 0;
     color: var(--color-soft-panel);
     font-size: 1rem;
 }
 
-.pro-version {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    min-width: 0;
-    gap: 0.5rem;
-}
-
-.pro-button {
+.workspace-topbar__trial-button {
     display: inline-flex;
     min-width: 0;
     height: 2rem;
@@ -112,32 +106,32 @@
     font-size: 0.82rem;
 }
 
-.pro-button span {
+.workspace-topbar__trial-button span {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
 @media (max-width: 64rem) {
-    .workspace-header-chat-container {
+    .workspace-topbar {
         grid-template-columns: 4rem minmax(14rem, 16rem) minmax(0, 1fr);
     }
 
-    .workspace-header-chat-content {
+    .workspace-topbar__content {
         grid-template-columns: auto minmax(10rem, 1fr) auto;
     }
 
-    .pro-button span {
+    .workspace-topbar__trial-button span {
         display: none;
     }
 }
 
 @media (max-width: 48rem) {
-    .workspace-header-chat-container {
+    .workspace-topbar {
         grid-template-columns: 3.75rem minmax(0, 1fr);
     }
 
-    .workspace-header-chat-content {
+    .workspace-topbar__content {
         grid-column: 1 / -1;
         grid-template-columns: auto minmax(0, 1fr) auto;
         gap: 0.5rem;

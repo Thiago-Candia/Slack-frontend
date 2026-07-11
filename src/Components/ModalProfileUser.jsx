@@ -31,67 +31,71 @@ const ModalProfileUser = ({ isOpen, onClose }) => {
     const email = user?.email || 'Sin correo registrado'
 
     return (
-        <div className="modal-profile-overlay" role="dialog" aria-modal="true" aria-labelledby="profile-title">
-            <div className="modal-profile">
-                <div className="modal-profile-header">
-                    <h2 className="modal-title text" id="profile-title">Perfil</h2>
-                    <button type="button" onClick={onClose} className="btn-close-modal-profile" aria-label="Cerrar">X</button>
+        <div className="profile-modal" role="dialog" aria-modal="true" aria-labelledby="profile-title">
+            <div className="profile-modal__dialog">
+                <div className="profile-modal__header">
+                    <h2 className="profile-modal__title" id="profile-title">Perfil</h2>
+                    <button type="button" onClick={onClose} className="profile-modal__close-button" aria-label="Cerrar">X</button>
                 </div>
-                <div className="user-info">
-                    <div className="avatar-user">
-                        <img 
-                            src={user?.profile_avatar_base64 || DEFAULT_AVATAR_URL} 
-                            alt={username} 
+
+                <div className="profile-modal__layout">
+                    <div className="profile-modal__avatar-frame">
+                        <img
+                            className="profile-modal__avatar"
+                            src={user?.profile_avatar_base64 || DEFAULT_AVATAR_URL}
+                            alt={username}
                         />
                     </div>
-                    <div className="modal-profile-info">
-                        <div className="modal-profile-info-item">
-                            <h3 className="text">{username}</h3>
-                            <button type="button" className="btn-config btn-edit-profile" onClick={openEditModal}>
-                                <span className="text-edit">Editar</span>
+
+                    <div className="profile-modal__content">
+                        <div className="profile-modal__identity-row">
+                            <h3 className="profile-modal__username">{username}</h3>
+                            <button type="button" className="profile-modal__link-button" onClick={openEditModal}>
+                                Editar
                             </button>
                         </div>
-                        <div className="modal-profile-info-item">
+
+                        <div className="profile-modal__pronunciation">
                             <Icons.Plus/>
-                            <span>Agregar pronunciación del nombre</span>
+                            <span>Agregar pronunciacion del nombre</span>
                         </div>
-                        <div className="modal-profile-info-item text">
-                            Disponible
-                        </div>
-                        <div className="modal-profile-info-item text">
+
+                        <p className="profile-modal__availability">Disponible</p>
+
+                        <div className="profile-modal__local-time">
                             <Icons.History/>
                             <span>{getFormattedDateMMHHDDMM()} hora local</span>
                         </div>
-                        <div className="modal-profile-info-item">
-                            <button type="button" className="btn-edit-status btn-config" disabled>
-                                <span className="text">Establecer un estado</span>
+
+                        <div className="profile-modal__status-actions">
+                            <button type="button" className="profile-modal__status-button" disabled>
+                                Establecer un estado
                             </button>
-                            <button type="button" className="btn-edit-status btn-config" disabled>
-                                <span className="text">Ver como</span>
+                            <button type="button" className="profile-modal__status-button" disabled>
+                                Ver como
                             </button>
-                            <button type="button" className="btn-edit-status btn-config" aria-label="Más opciones" disabled>
-                                <i className="text">
-                                    <Icons.MoreOptionsVertical/> 
-                                </i>
+                            <button type="button" className="profile-modal__status-button profile-modal__status-button--icon" aria-label="Mas opciones" disabled>
+                                <Icons.MoreOptionsVertical/>
                             </button>
                         </div>
-                        <div className="modal-profile-info-item text">
-                            <div className="modal-profile-info-item-contact">
-                                <span>Información de contacto</span>
-                                <button type="button" className="btn-config" disabled>
-                                    <span className="text-edit">Editar</span>
+
+                        <section className="profile-modal__contact" aria-label="Informacion de contacto">
+                            <div className="profile-modal__contact-header">
+                                <h4>Informacion de contacto</h4>
+                                <button type="button" className="profile-modal__link-button" disabled>
+                                    Editar
                                 </button>
                             </div>
-                            <div className="modal-profile-info-item-contact">
-                                <div className="modal-profile-email">
-                                    <i><Icons.Mail/></i>
-                                </div>
-                                <div className="modal-profile-email">
-                                    <span>Dirección de correo electrónico</span>
-                                    <span>{email}</span>
+                            <div className="profile-modal__email-row">
+                                <span className="profile-modal__email-icon">
+                                    <Icons.Mail/>
+                                </span>
+                                <div className="profile-modal__email-copy">
+                                    <span>Direccion de correo electronico</span>
+                                    <a href={`mailto:${email}`}>{email}</a>
                                 </div>
                             </div>
-                        </div>
+                        </section>
                     </div>
                 </div>
             </div>

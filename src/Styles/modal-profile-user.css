@@ -1,141 +1,166 @@
-
-
-/* MODAL PROFILE */
-
-.modal-profile-overlay{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.profile-modal {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    background-color: rgb(0 0 0 / 50%);
 }
 
-.modal-profile{
-    display: flex;
-    flex-direction: column;
-    margin: 20px;
+.profile-modal__dialog {
+    display: grid;
+    gap: 1rem;
+    width: min(100%, 36rem);
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
     background-color: var(--board-slack);
-    padding: 30px;
-    border-radius: 8px ;
+    color: var(--color-white);
 }
 
-/* HEADER. TITULO Y BOTON CERRAR */
-
-.modal-profile-header{
+.profile-modal__header {
     display: flex;
-    flex-direction: row;
-    width: 100%;
+    align-items: center;
     justify-content: space-between;
+    gap: 1rem;
 }
 
-.btn-close-modal-profile{
-    background-color: transparent;
-    color: #D1D2D3 ;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-    width: 30px;
-    height: 30px;
+.profile-modal__title,
+.profile-modal__username {
+    color: var(--color-white);
 }
 
-.btn-close-modal-profile:hover{
-    background-color: #26292C ;
-    border-radius: 8px;
+.profile-modal__title {
+    font-size: 1.35rem;
 }
 
-.avatar-user{
-    margin: auto;
-    margin-top: 10px;
-    width: 200px;
-    height: 200px;
+.profile-modal__close-button {
+    display: inline-flex;
+    width: 2rem;
+    height: 2rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.45rem;
+    color: var(--color-soft-panel);
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.profile-modal__close-button:hover,
+.profile-modal__close-button:focus-visible {
+    background-color: var(--black-bgc);
+    outline: none;
+}
+
+.profile-modal__layout {
+    display: grid;
+    gap: 1.25rem;
+}
+
+.profile-modal__avatar-frame {
+    width: 12.5rem;
+    height: 12.5rem;
+    margin: 0 auto;
     overflow: hidden;
-    border-radius: 8px;
+    border-radius: 0.65rem;
 }
 
-.avatar-user img{
+.profile-modal__avatar {
     width: 100%;
     height: 100%;
-    object-fit: cover ;
+    object-fit: cover;
 }
 
-.modal-profile-info{
-    display: flex;
-    flex-direction: column;
+.profile-modal__content {
+    display: grid;
+    gap: 0.85rem;
 }
 
-.modal-profile-info-item{
+.profile-modal__identity-row,
+.profile-modal__status-actions,
+.profile-modal__contact-header,
+.profile-modal__email-row,
+.profile-modal__pronunciation,
+.profile-modal__local-time {
     display: flex;
     align-items: center;
-    margin-top: 10px ;
+    gap: 0.65rem;
 }
 
-.modal-profile-info-item:first-child {
+.profile-modal__identity-row,
+.profile-modal__contact-header {
     justify-content: space-between;
 }
 
-.text-edit{
+.profile-modal__link-button,
+.profile-modal__pronunciation,
+.profile-modal__email-copy a {
     color: var(--blue-edit);
 }
 
-.modal-profile-info-item:nth-child(2){
-    color: var(--blue-edit);
+.profile-modal__link-button {
+    font-weight: 700;
 }
 
-.modal-profile-info-item:nth-child(5){
-    justify-content: space-around;
-    gap: 10px;
+.profile-modal__availability {
+    color: var(--color-white);
 }
 
-.btn-edit-status{
-    border: 1px solid #fff;
-    border-radius: 8px;
-    padding: 12px;
+.profile-modal__status-actions {
+    flex-wrap: wrap;
 }
 
-.modal-profile-info-item:nth-child(6){
-    margin-top: 15px;
-    gap: 15px;
-    flex-direction: column;
+.profile-modal__status-button {
+    min-height: 2.4rem;
+    padding: 0.6rem 0.8rem;
+    border: 0.0625rem solid var(--color-white);
+    border-radius: 0.5rem;
+    color: var(--color-white);
 }
 
-.modal-profile-info-item-contact{
-    display: flex;
-    width: 100%;
+.profile-modal__status-button:disabled {
+    cursor: default;
+    opacity: 0.75;
 }
 
-.modal-profile-info-item-contact:first-child{
-    justify-content: space-between;
+.profile-modal__status-button--icon {
+    width: 2.5rem;
+    padding: 0;
 }
 
-.modal-profile-info-item-contact:last-child{
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
+.profile-modal__contact {
+    display: grid;
+    gap: 0.85rem;
+    margin-top: 0.5rem;
 }
 
-.modal-profile-email{
-    display: flex;
+.profile-modal__contact-header h4 {
+    color: var(--color-white);
+    font-size: 1rem;
 }
 
-.modal-profile-email i{
-    padding: 8px;
-    border-radius: 5px;
-    background-color: #222529 ;
+.profile-modal__email-icon {
+    display: inline-flex;
+    padding: 0.5rem;
+    border-radius: 0.35rem;
+    background-color: var(--black-bgc);
 }
 
-.modal-profile-email:last-child{
-    flex-direction: column;
+.profile-modal__email-copy {
+    display: grid;
+    gap: 0.15rem;
 }
 
-.modal-profile-email span:last-child{
-    color: var(--blue-edit);
+.profile-modal__email-copy span {
+    color: var(--color-soft-panel);
+    font-size: 0.88rem;
 }
 
-
-
-
-
+@media (min-width: 42rem) {
+    .profile-modal__layout {
+        grid-template-columns: 12.5rem minmax(0, 1fr);
+        align-items: start;
+    }
+}
