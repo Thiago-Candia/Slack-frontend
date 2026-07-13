@@ -1,11 +1,12 @@
 import React, { createContext, useEffect, useState } from "react";
-import { AUTH_TOKEN_KEY } from "../services/httpClient";
+import { AUTH_TOKEN_KEY } from "../services";
+import { clearSessionCache } from "../utils/storage.utils";
 
 export const AuthContext = createContext()
 
 const AuthContextProvider = ({children}) => {
 
-    let isAuthenticatedInitialState = Boolean(localStorage.getItem(AUTH_TOKEN_KEY))
+    const isAuthenticatedInitialState = Boolean(localStorage.getItem(AUTH_TOKEN_KEY))
 
     const [isAuthenticatedState, setIsAuthenticatedState] = useState(isAuthenticatedInitialState)
 
@@ -21,6 +22,7 @@ const AuthContextProvider = ({children}) => {
 
     const logout = () => {
         localStorage.removeItem(AUTH_TOKEN_KEY)
+        clearSessionCache()
         setIsAuthenticatedState(false)
     }
 

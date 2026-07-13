@@ -1,7 +1,7 @@
 import React, { createContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useApiRequest } from "../hooks/useApiRequest";
-import { workspaceService } from "../services/workspace.service";
+import { workspaceService } from "../services";
 
 export const InviteUserContext = createContext()
 

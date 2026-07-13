@@ -1,72 +1,76 @@
-import React, { useEffect } from 'react'
-import { useApiRequest } from '../hooks/useApiRequest'
-import { useForm } from '../hooks/useForm'
-import { useNavigate } from 'react-router-dom'
-import '../Styles/styles.css'
-import { authService } from '../services/auth.service'
+import { useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { authService } from "../services";
+import { useApiRequest } from "../hooks/useApiRequest";
+import { useForm } from "../hooks/useForm";
+import "../Styles/styles.css";
 
 const RewritePasswordScreen = () => {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const resetToken = searchParams.get("reset_token");
+  const [validationError, setValidationError] = useState("");
+  const { formState, handleChangeInput } = useForm({ password: "" });
+  const { responseApiState, execute: rewritePasswordRequest } = useApiRequest(authService.rewritePassword);
 
-    const navigate = useNavigate()
+  useEffect(() => {
+    if (!resetToken) {
+      navigate("/reset-password", { replace: true });
+    }
+  }, [navigate, resetToken]);
 
-        const searchParams = new URLSearchParams(window.location.search)
-        const reset_token = searchParams.get('reset_token')
+  useEffect(() => {
+    if (responseApiState.data) {
+      navigate("/login", { replace: true });
+    }
+  }, [navigate, responseApiState.data]);
 
-    useEffect(() => {
-        if(!reset_token){
-            navigate('/')
-        }
-    })
+  const handleSubmitForm = async (event) => {
+    event.preventDefault();
 
-    const initialFormState = {
-        password: ''
+    if (formState.password.length < 8) {
+      setValidationError("La contraseña debe tener al menos 8 caracteres.");
+      return;
     }
 
-    const {formState, handleChangeInput} = useForm(initialFormState)
-    const {responseApiState, execute: rewritePasswordRequest} = useApiRequest(authService.rewritePassword)
+    setValidationError("");
+    await rewritePasswordRequest({ password: formState.password, reset_token: resetToken });
+  };
 
-    useEffect(
-        () => {
-            if(responseApiState.data){
-                navigate('/login')
-            }
-        },
-        [responseApiState]
-    )
-    const handleSubmitForm = async (e) => {
-        e.preventDefault()
-        await rewritePasswordRequest({password: formState.password, reset_token}) 
-    }
+  const handlePasswordChange = (event) => {
+    handleChangeInput(event);
+    setValidationError("");
+  };
 
-    return (
-        <div id='rewrite-password-screen'>
-            <div className='rewrite-password-container'>
-                <h1>Recupera tu contraseña</h1>
-                <form onSubmit={handleSubmitForm}>
-                    <div>
-                        <label htmlFor="email"> Nueva contraseña </label>
-                        <input 
-                            type="password"
-                            name='password'
-                            id='password'
-                            placeholder='Nueva contraseña'
-                            value={formState.password} 
-                            onChange={handleChangeInput}
-                        />
-                    </div>
-                    {responseApiState.error && <p>{responseApiState.error.message}</p>}
-                    {responseApiState.loading
-                        ? <p>Cargando...</p>
-                        : (
-                            responseApiState.data 
-                            ? <span>Enviado</span>
-                            : <button>Establecer nueva contraseña</button>
-                        )
-                    }
-                </form>
-            </div>
-        </div>
-    )
-}
+  const responseError = responseApiState.error?.message;
 
-export default RewritePasswordScreen
+  return (
+    <div id="rewrite-password-screen">
+      <div className="rewrite-password-container">
+        <h1>Recupera tu contrase&ntilde;a</h1>
+        <form onSubmit={handleSubmitForm} noValidate>
+          <div>
+            <label htmlFor="password">Nueva contrase&ntilde;a</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Nueva contrase&ntilde;a"
+              value={formState.password}
+              onChange={handlePasswordChange}
+              autoComplete="new-password"
+              aria-invalid={Boolean(validationError)}
+              aria-describedby={validationError ? "rewrite-password-error" : undefined}
+            />
+          </div>
+          {(validationError || responseError) && <p id="rewrite-password-error">{validationError || responseError}</p>}
+          <button type="submit" disabled={responseApiState.loading}>
+            {responseApiState.loading ? "Guardando..." : "Establecer nueva contrase&ntilde;a"}
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default RewritePasswordScreen;

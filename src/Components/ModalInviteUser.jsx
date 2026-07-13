@@ -51,14 +51,14 @@ const ModalInviteUser = ({ isOpen, onClose }) => {
                 <h2 className="invite-user-modal__title" id="invite-user-title">Invitar usuario</h2>
                 <div className="invite-user-modal__actions">
                     <button className="invite-user-modal__submit-button" type="button" onClick={handleGenerateInviteLink} disabled={isInviting}>
-                        {isInviting ? "Generando..." : "Generar invitacion"}
+                        {isInviting ? "Generando..." : "Generar invitaci&oacute;n"}
                     </button>
                     <button type="button" onClick={onClose} className="invite-user-modal__close-button" aria-label="Cerrar">X</button>
                 </div>
                 {error && <p className="invite-user-modal__error">{error}</p>}
                 {inviteLink && (
                     <div className="invite-user-modal__link-box">
-                        <h3>Copiar enlace de invitacion</h3>
+                        <h3>Copiar enlace de invitaci&oacute;n</h3>
                         <button type="button" onClick={handleCopyLink} className="invite-user-modal__copy-button">
                             {inviteLink}
                         </button>

@@ -1,11 +1,11 @@
-import ENVIROMENT from "../config/enviroment";
+import ENVIRONMENT from "../config/environment";
 import { ServerError } from "../utils/error.utils.js";
 
 export const AUTH_TOKEN_KEY = "authorization_token";
 
 const getToken = () => localStorage.getItem(AUTH_TOKEN_KEY);
 
-const buildUrl = (path) => `${ENVIROMENT.URL_API}${path}`;
+const buildUrl = (path) => `${ENVIRONMENT.URL_API}${path}`;
 
 const parseResponseBody = async (response) => {
     const contentType = response.headers.get("content-type") || "";

@@ -1,8 +1,8 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ProfileContext } from "./ProfileContext";
 import { useApiRequest } from "../hooks/useApiRequest";
-import { directMessageService } from "../services/directMessage.service";
+import { directMessageService } from "../services";
 import { MessageContext } from "./MessageContext";
 import { WorkspaceContext } from "./WorkspaceContext";
 
@@ -19,7 +19,7 @@ const DirectMessageProvider = ({ children }) => {
         .flatMap((workspace) => workspace.members || [])
         .find((member) => member._id === user_id)
 
-    const normalizeSender = (sender) => {
+    const normalizeSender = useCallback((sender) => {
         const senderId = sender?._id || sender
 
         if (senderId === user?._id) {
@@ -31,12 +31,12 @@ const DirectMessageProvider = ({ children }) => {
         }
 
         return sender && typeof sender === "object" ? sender : { _id: senderId, username: "Usuario" }
-    }
+    }, [receiver, user])
 
-    const normalizeMessage = (message) => ({
+    const normalizeMessage = useCallback((message) => ({
         ...message,
         sender: normalizeSender(message.sender)
-    })
+    }), [normalizeSender])
 
     useEffect(() => {
         const fetchMessages = async () => {
@@ -55,7 +55,7 @@ const DirectMessageProvider = ({ children }) => {
         if (responseApiState.data?.payload?.messages) {
             setMessages(responseApiState.data.payload.messages.map(normalizeMessage))
         }
-    }, [responseApiState.data])
+    }, [normalizeMessage, responseApiState.data])
 
     const addMessage = (newMessage) => {
         setMessages((prevMessages) => [...prevMessages, normalizeMessage(newMessage)])

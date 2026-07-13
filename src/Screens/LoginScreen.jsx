@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../Context/AuthContext'
 import '../Styles/styles.css'
 import { WorkspaceContext } from '../Context/WorkspaceContext'
-import { authService } from '../services/auth.service'
+import { authService } from '../services'
 
 const LoginScreen = () => {
 
@@ -41,7 +41,7 @@ const LoginScreen = () => {
   return (
     <div className='login'>
       <div className="login-container">
-        <h1>Iniciar sesión</h1>
+        <h1>Iniciar sesi&oacute;n</h1>
         <form className="login-form" onSubmit={handleSubmitForm}>
           <div>
             <label htmlFor="email" className='login-label'>Email </label>
@@ -55,7 +55,7 @@ const LoginScreen = () => {
             />
           </div>
           <div>
-            <label htmlFor="password" className='login-label'>Contraseña </label>
+            <label htmlFor="password" className='login-label'>Contrase&ntilde;a </label>
             <input
               type="password"
               id="password"
@@ -71,13 +71,13 @@ const LoginScreen = () => {
 
         <div className="login-links">
           <Link to="/reset-password">
-            Olvidé mi contraseña
+            Olvid&eacute; mi contrase&ntilde;a
           </Link>
         </div>
         <div className="login-links">
           <span>No tienes cuenta? 
             <Link to="/register" className='sign-in__link'>
-              Regístrate
+              Reg&iacute;strate
             </Link>
           </span>
         </div>

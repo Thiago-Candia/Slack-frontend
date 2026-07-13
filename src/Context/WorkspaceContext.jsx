@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState, useCallback } from "react"
 import { useApiRequest } from "../hooks/useApiRequest"
-import { workspaceService } from "../services/workspace.service"
-import { AUTH_TOKEN_KEY } from "../services/httpClient"
+import { AUTH_TOKEN_KEY, workspaceService } from "../services"
+import { clearSessionCache } from "../utils/storage.utils"
 
 export const WorkspaceContext = createContext()
 
@@ -31,7 +31,7 @@ const WorkspaceContextProvider = ({ children }) => {
 
     useEffect(() => {
         loadWorkspaces()
-    }, [])
+    }, [loadWorkspaces])
 
 
     useEffect(() => {
@@ -54,10 +54,11 @@ const WorkspaceContextProvider = ({ children }) => {
         if (responseApiState?.error) {
             setError(responseApiState.error.message || "Error al cargar workspaces")
         }
-    }, [responseApiState])
+    }, [responseApiState.data, responseApiState.error])
 
     const logout = useCallback(() => {
         localStorage.removeItem(AUTH_TOKEN_KEY)
+        clearSessionCache()
         setUser(null)
         setWorkspaces([])
     }, [])

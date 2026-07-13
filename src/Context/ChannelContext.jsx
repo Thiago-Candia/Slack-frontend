@@ -1,7 +1,8 @@
 import React, { createContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { useApiRequest } from "../hooks/useApiRequest"
-import { channelService } from "../services/channel.service"
+import { channelService } from "../services"
+import { getChannelsStorageKey, getStoredJson, setStoredJson } from "../utils/storage.utils"
 
 export const ChannelContext = createContext()
 
@@ -10,13 +11,7 @@ const getStoredChannels = (workspaceId) => {
         return []
     }
 
-    try {
-        const savedChannels = localStorage.getItem(`channels_${workspaceId}`)
-        return savedChannels ? JSON.parse(savedChannels) : []
-    }
-    catch {
-        return []
-    }
+    return getStoredJson(getChannelsStorageKey(workspaceId), [])
 }
 
 const ChannelContextProvider = ({ children }) => {
@@ -45,7 +40,7 @@ const ChannelContextProvider = ({ children }) => {
         if (responseApiState.data?.payload?.channels) {
             const nextChannels = responseApiState.data.payload.channels
             setChannels(nextChannels)
-            localStorage.setItem(`channels_${workspace_id}`, JSON.stringify(nextChannels))
+            setStoredJson(getChannelsStorageKey(workspace_id), nextChannels)
         }
     }, [responseApiState.data, workspace_id])
 

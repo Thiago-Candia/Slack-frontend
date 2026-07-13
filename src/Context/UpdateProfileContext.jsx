@@ -1,6 +1,6 @@
 import React,{ createContext, useEffect, useState } from "react"
 import { useApiRequest } from "../hooks/useApiRequest"
-import { profileService } from "../services/profile.service"
+import { profileService } from "../services"
 
 export const UpdateProfileContext = createContext();
 

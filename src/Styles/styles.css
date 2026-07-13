@@ -19,11 +19,11 @@
 
 /* Workspace chat */
 @import url('workspace-screen.css');
-@import url('new.message.css');
+@import url('new-message.css');
 @import url('message-list.css');
 @import url('modal-create-channel.css');
 @import url('sidebar-list.css');
-@import url('modal-inivte-user.css');
+@import url('modal-invite-user.css');
 @import url('workspace-chat-header.css');
 @import url('workspace-chat.css');
 @import url('modal-profile-user.css');

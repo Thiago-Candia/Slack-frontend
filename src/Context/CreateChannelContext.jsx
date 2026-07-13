@@ -2,7 +2,8 @@ import React, { createContext, useState, useContext } from "react"
 import { ChannelContext } from "./ChannelContext"
 import { useApiRequest } from "../hooks/useApiRequest"
 import { useParams } from "react-router-dom"
-import { channelService } from "../services/channel.service"
+import { channelService } from "../services"
+import { getChannelsStorageKey, setStoredJson } from "../utils/storage.utils"
 
 export const CreateChannel = createContext()
 
@@ -30,7 +31,7 @@ export const CreateChannelContextProvider = ({ children }) => {
             if (response?.payload?.new_channel) {
                 const updatedChannels = [...channels, response.payload.new_channel]
                 setChannels(updatedChannels)
-                localStorage.setItem(`channels_${workspace_id}`, JSON.stringify(updatedChannels))
+                setStoredJson(getChannelsStorageKey(workspace_id), updatedChannels)
             }
 
             return response

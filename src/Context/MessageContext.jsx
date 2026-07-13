@@ -1,7 +1,7 @@
 import React,{ createContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { useApiRequest } from "../hooks/useApiRequest"
-import { channelService } from "../services/channel.service"
+import { channelService } from "../services"
 
 export const MessageContext = createContext()
 

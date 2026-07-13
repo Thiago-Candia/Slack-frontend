@@ -45,8 +45,8 @@ const MessageList = () => {
         return (
             <div className="message-list">
                 <div className="message-list__state">
-                    <h2>No hay mensajes todavia</h2>
-                    <p>Envia el primer mensaje para iniciar la conversacion.</p>
+                    <h2>No hay mensajes todav&iacute;a</h2>
+                    <p>Env&iacute;a el primer mensaje para iniciar la conversaci&oacute;n.</p>
                 </div>
             </div>
         )

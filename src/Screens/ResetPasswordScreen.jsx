@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useApiRequest } from '../hooks/useApiRequest'
 import { useForm } from '../hooks/useForm'
 import { Link } from 'react-router-dom'
-import { authService } from '../services/auth.service'
+import { authService } from '../services'
 import '../Styles/styles.css'
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -99,10 +99,10 @@ const ResetPasswordScreen = () => {
                     </button>
 
                     <div className="reset-password-links">
-                        <Link to="/login">Volver a iniciar sesión</Link>
+                        <Link to="/login">Volver a iniciar sesi&oacute;n</Link>
                         <span>
-                            Aun no tienes cuenta?
-                            <Link to="/register">Registrate</Link>
+                            A&uacute;n no tienes cuenta?
+                            <Link to="/register">Reg&iacute;strate</Link>
                         </span>
                     </div>
                 </form>

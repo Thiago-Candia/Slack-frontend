@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 import { WorkspaceContext } from "./WorkspaceContext";
 import { useApiRequest } from "../hooks/useApiRequest";
-import { workspaceService } from "../services/workspace.service";
+import { workspaceService } from "../services";
 
 export const CreateWorkspaceContext = createContext();
 

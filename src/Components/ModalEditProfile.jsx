@@ -58,7 +58,6 @@ const ModalEditProfile = ({ isOpen, onClose }) => {
 
             if (response?.payload?.user) {
                 const updatedUser = response.payload.user
-                localStorage.setItem('user', JSON.stringify(updatedUser))
                 setUser(updatedUser)
             }
 

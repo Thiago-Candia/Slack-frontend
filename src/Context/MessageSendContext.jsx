@@ -1,8 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 import { useApiRequest } from "../hooks/useApiRequest";
 import { useParams } from "react-router-dom";
-import { channelService } from "../services/channel.service";
-import { directMessageService } from "../services/directMessage.service";
+import { channelService, directMessageService } from "../services";
 
 export const MessageSendContext = createContext();
 
