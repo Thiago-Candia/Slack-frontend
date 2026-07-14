@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Icons } from "../Assets/Icons/Icons"
-import { ProfileContext } from "../Context/ProfileContext"
 import { AuthContext } from "../Context/AuthContext"
 import { WorkspaceContext } from "../Context/WorkspaceContext"
 import useModal from "../hooks/useModal"
@@ -11,9 +10,8 @@ import { DEFAULT_AVATAR_URL } from "../constants/workspace.constants"
 
 const WorkspacePrimarySidebar = () => {
     const navigate = useNavigate()
-    const { user } = useContext(ProfileContext)
     const { logout: logoutAuth } = useContext(AuthContext)
-    const { logout: logoutWorkspace } = useContext(WorkspaceContext)
+    const { logout: logoutWorkspace, user } = useContext(WorkspaceContext)
     const { isOpen: isProfileModalOpen, openModal: openProfileModal, closeModal: closeProfileModal } = useModal()
     const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false)
 

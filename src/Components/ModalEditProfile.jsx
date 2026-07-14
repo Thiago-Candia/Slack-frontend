@@ -1,13 +1,11 @@
 import React, { useState, useContext, useRef, useEffect } from 'react'
-import { ProfileContext } from '../Context/ProfileContext'
-import { UpdateProfileContext } from '../Context/UpdateProfileContext'
+import { WorkspaceContext } from '../Context/WorkspaceContext'
 import { useForm } from '../hooks/useForm'
 import '../Styles/styles.css'
 import { DEFAULT_AVATAR_URL } from '../constants/workspace.constants'
 
 const ModalEditProfile = ({ isOpen, onClose }) => {
-    const { updateProfile } = useContext(UpdateProfileContext)
-    const { user, setUser } = useContext(ProfileContext)
+    const { user, updateProfile } = useContext(WorkspaceContext)
     const fileInputRef = useRef(null)
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState(null)
@@ -57,11 +55,8 @@ const ModalEditProfile = ({ isOpen, onClose }) => {
             })
 
             if (response?.payload?.user) {
-                const updatedUser = response.payload.user
-                setUser(updatedUser)
+                onClose()
             }
-
-            onClose()
         }
         catch (error) {
             setError(error.message || 'Error al actualizar el perfil')

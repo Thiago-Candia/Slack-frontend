@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { ProfileContext } from '../Context/ProfileContext'
+import { WorkspaceContext } from '../Context/WorkspaceContext'
 import { Icons } from '../Assets/Icons/Icons'
 import { getFormattedDateMMHHDDMM } from '../Helpers/Date.js'
 import useModal from '../hooks/useModal.jsx'
@@ -8,7 +8,7 @@ import ModalEditProfile from './ModalEditProfile.jsx'
 import { DEFAULT_AVATAR_URL } from '../constants/workspace.constants.js'
 
 const ModalProfileUser = ({ isOpen, onClose }) => {
-    const { user } = useContext(ProfileContext)
+    const { user } = useContext(WorkspaceContext)
     const { isOpen: isEditOpen, openModal: openEditModal, closeModal: closeEditModal } = useModal(false)
 
     useEffect(() => {

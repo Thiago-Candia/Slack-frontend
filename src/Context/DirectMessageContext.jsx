@@ -1,6 +1,5 @@
 import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { ProfileContext } from "./ProfileContext";
 import { useApiRequest } from "../hooks/useApiRequest";
 import { directMessageService } from "../services";
 import { MessageContext } from "./MessageContext";
@@ -10,8 +9,7 @@ export const DirectMessageContext = createContext();
 
 const DirectMessageProvider = ({ children }) => {
     const { user_id } = useParams()
-    const { user } = useContext(ProfileContext)
-    const { workspaces } = useContext(WorkspaceContext)
+    const { user, workspaces } = useContext(WorkspaceContext)
     const [messages, setMessages] = useState([])
     const { responseApiState, execute: getDirectMessages } = useApiRequest(directMessageService.getByUser)
 
