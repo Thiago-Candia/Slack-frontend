@@ -150,11 +150,42 @@
 }
 
 @media (max-width: 48rem) {
+    .workspace-primary-sidebar {
+        padding: 0.5rem 0.125rem;
+    }
+
+    .workspace-primary-sidebar__nav {
+        gap: 0.5rem;
+    }
+
     .workspace-primary-sidebar__nav-item {
         width: 3.25rem;
     }
 
     .workspace-primary-sidebar__label {
         display: none;
+    }
+}
+
+@media (max-width: 30rem) {
+    .workspace-primary-sidebar__nav-item {
+        width: 3rem;
+        min-height: 3.25rem;
+    }
+
+    .workspace-primary-sidebar__logo-button,
+    .workspace-primary-sidebar__button {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    .workspace-primary-sidebar__profile-trigger {
+        width: 2.25rem;
+        height: 2.25rem;
+    }
+
+    .workspace-profile-menu--open {
+        left: 2.9rem;
+        width: min(15rem, calc(100vw - 3.5rem));
     }
 }

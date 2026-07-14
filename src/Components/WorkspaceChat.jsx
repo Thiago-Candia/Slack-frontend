@@ -6,7 +6,7 @@ import WorkspacePrimarySidebar from "./WorkspacePrimarySidebar.jsx"
 import WorkspaceSidebar from "./WorkspaceSidebar.jsx"
 import WorkspaceConversation from "./WorkspaceConversation.jsx"
 
-const WorkspaceChat = () => {
+const WorkspaceChat = ({ isSidebarOpen, onCloseSidebar }) => {
     const { workspace_id } = useParams()
     const { workspaces, loading, error } = useContext(WorkspaceContext)
     const currentWorkspace = workspaces.find((workspace) => workspace._id === workspace_id)
@@ -14,7 +14,13 @@ const WorkspaceChat = () => {
     return (
         <>
             <WorkspacePrimarySidebar/>
-            <WorkspaceSidebar workspace={currentWorkspace} loading={loading} error={error}/>
+            <WorkspaceSidebar
+                workspace={currentWorkspace}
+                loading={loading}
+                error={error}
+                isMobileOpen={isSidebarOpen}
+                onMobileClose={onCloseSidebar}
+            />
             <WorkspaceConversation workspace={currentWorkspace} loading={loading} error={error}/>
         </>
     )

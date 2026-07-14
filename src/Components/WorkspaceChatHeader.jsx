@@ -4,7 +4,7 @@ import { Icons } from "../Assets/Icons/Icons"
 import { WorkspaceContext } from "../Context/WorkspaceContext"
 import { ChannelContext } from "../Context/ChannelContext"
 
-const WorkspaceChatHeader = () => {
+const WorkspaceChatHeader = ({ isSidebarOpen, onToggleSidebar }) => {
     const navigate = useNavigate()
     const { workspace_id, channel_id, user_id } = useParams()
     const { workspaces } = useContext(WorkspaceContext)
@@ -19,6 +19,16 @@ const WorkspaceChatHeader = () => {
         <header className="workspace-topbar">
             <div className="workspace-topbar__content">
                 <div className="workspace-topbar__navigation">
+                    <button
+                        type="button"
+                        className="workspace-topbar__icon-button workspace-topbar__sidebar-button"
+                        onClick={onToggleSidebar}
+                        aria-label="Mostrar navegacion del workspace"
+                        aria-controls="workspace-navigation"
+                        aria-expanded={isSidebarOpen}
+                    >
+                        <Icons.MoreOptions />
+                    </button>
                     <button type="button" onClick={() => navigate(-1)} className="workspace-topbar__icon-button" aria-label="Volver">
                         <Icons.ArrowBack />
                     </button>

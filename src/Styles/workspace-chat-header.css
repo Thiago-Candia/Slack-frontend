@@ -39,6 +39,10 @@
     transition: background-color 180ms ease, opacity 180ms ease;
 }
 
+.workspace-topbar__sidebar-button {
+    display: none;
+}
+
 .workspace-topbar__icon-button:hover:not(:disabled),
 .workspace-topbar__icon-button:focus-visible {
     background-color: rgb(255 255 255 / 10%);
@@ -135,5 +139,28 @@
         grid-column: 1 / -1;
         grid-template-columns: auto minmax(0, 1fr) auto;
         gap: 0.5rem;
+    }
+
+    .workspace-topbar__sidebar-button {
+        display: inline-flex;
+    }
+
+    .workspace-topbar__navigation {
+        gap: 0.2rem;
+    }
+
+    .workspace-topbar__navigation .workspace-topbar__icon-button[aria-label="Historial"],
+    .workspace-topbar__trial-button {
+        display: none;
+    }
+}
+
+@media (max-width: 30rem) {
+    .workspace-topbar__navigation .workspace-topbar__icon-button[aria-label="Avanzar"] {
+        display: none;
+    }
+
+    .workspace-topbar__content {
+        padding: 0 0.4rem;
     }
 }

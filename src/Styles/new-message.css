@@ -72,3 +72,19 @@
     color: var(--color-error);
     font-size: 0.82rem;
 }
+
+@media (max-width: 30rem) {
+    .message-composer {
+        margin: 0.5rem;
+        padding: 0.5rem;
+    }
+
+    .message-composer__toolbar {
+        overflow-x: auto;
+        padding-bottom: 0.15rem;
+    }
+
+    .message-composer__icon-button {
+        flex: 0 0 2rem;
+    }
+}
